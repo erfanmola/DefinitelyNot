@@ -1,0 +1,9 @@
+{
+	"require": {
+		"openswoole/core": "^22.2",
+		"vlucas/phpdotenv": "^5.6"
+	},
+	"require-dev": {
+		"openswoole/ide-helper": "~22.0.1"
+	}
+}
