@@ -11,7 +11,7 @@ $balances = PromiseAll::all(
 		fn($wallet) => fn() => [
 			'type'    => $wallet['type'],
 			'address' => $wallet['address'],
-			'balance' => getWalletBalance($from_id, $wallet['type'], $wallet['address'], $mysqli)
+			'balance' => getWalletBalance($wallet['type'], $wallet['address'], $mysqli)
 		],
 		$user['wallets']
 	)

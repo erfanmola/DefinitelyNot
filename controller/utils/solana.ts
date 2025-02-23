@@ -37,7 +37,11 @@ export const createSolWallet = async (): Promise<Wallet> => {
 };
 
 export const getSolBalance = async (pubKey: string): Promise<number> => {
-	const publicKey = new PublicKey(pubKey);
-	const balance = await connection.getBalance(publicKey);
-	return balance / LAMPORTS_PER_SOL;
+	try {
+		const publicKey = new PublicKey(pubKey);
+		const balance = await connection.getBalance(publicKey);
+		return balance / LAMPORTS_PER_SOL;
+	} catch (e) {
+		return -1;
+	}
 };

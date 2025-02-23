@@ -7,10 +7,10 @@ if ($results === []) {
 	$results[] = [
 		'type'        => 'article',
 		'id'          => 'NotFound',
-		'title'       => t('inline_query.notfound.title'),
-		'description' => t('inline_query.notfound.message'),
+		'title'       => t('inline_query.notfound.title', $user['locale']),
+		'description' => t('inline_query.notfound.message', $user['locale']),
 		'input_message_content' => [
-			'message_text' => t('inline_query.notfound.message'),
+			'message_text' => t('inline_query.notfound.message', $user['locale']),
 			'parse_mode' => 'HTML',
 		],
 	];

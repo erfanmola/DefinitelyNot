@@ -3,7 +3,7 @@
 require_once __DIR__ . "/../i18n/en.php";
 require_once __DIR__ . "/../i18n/fa.php";
 
-function t(string $path, $language = 'en'): string
+function t(string $path, $language): string
 {
 	$path = explode('.', $path);
 	$data = match ($language) {

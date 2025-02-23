@@ -1,5 +1,7 @@
 <?php
 
+use OpenSwoole\Coroutine;
+
 function getWallets(int|string $user_id, mixed $conn): array | null
 {
 	return DPXDBQuery('wallets', '*', ['user_id' => $user_id], casts: [
@@ -36,34 +38,77 @@ function createWallet(int|string $user_id, string $type, mixed $conn): array | n
 	return null;
 }
 
-function getWalletBalance(int|string $user_id, string $type, string $address, mixed $conn): float
+function getWalletBalance(string $type, string $address, mixed $conn): float
 {
-	$type = strtoupper($type);
-	$result = requestController('/wallet/balance', [
-		'type'    => $type,
-		'address' => $address,
-	]);
+	global $cacheTableBalance;
 
-	$balance = (float)($result['balance'] ?? 0);
+	return $cacheTableBalance->get(joinPipe($type, $address), function () use (&$type, &$address, &$conn) {
+		$type = strtoupper($type);
+		$result = requestController('/wallet/balance', [
+			'type'    => $type,
+			'address' => $address,
+		]);
 
-	$oldBalance = (float)DPXDBQuery(
-		'wallets',
-		['balance'],
-		['address' => $address, 'type' => $type],
-		casts: ['balance' => 'double'],
-		conn: $conn
-	)['balance'] ?? 0;
+		$balance = (float)($result['balance'] ?? 0);
 
-	if ($balance !== $oldBalance) {
-		DPXDBUpdate(
+		$oldBalance = (float)DPXDBQuery(
 			'wallets',
-			[
-				'balance' => $balance,
-			],
+			['balance'],
 			['address' => $address, 'type' => $type],
-			$conn
-		);
+			casts: ['balance' => 'double'],
+			conn: $conn
+		)['balance'] ?? 0;
+
+		if ($balance < 0) {
+			return $oldBalance;
+		}
+
+		if ($balance !== $oldBalance) {
+			DPXDBUpdate(
+				'wallets',
+				[
+					'balance' => $balance,
+				],
+				['address' => $address, 'type' => $type],
+				$conn
+			);
+		}
+
+		return $balance;
+	}, config['CACHE_TABLE_BALANCE_TIME']);
+}
+
+function truncateWalletAddress($address, $firstLength = 6, $lastLength = 4)
+{
+	$length = strlen($address);
+
+	if ($length <= ($firstLength + $lastLength)) {
+		return $address;
 	}
 
-	return $balance;
+	$firstPart = substr($address, 0, $firstLength);
+	$lastPart = substr($address, -$lastLength);
+
+	return $firstPart . '...' . $lastPart;
+}
+
+function syncWalletsBalanceDeferred(array $wallets)
+{
+	Coroutine::defer(function () use (&$wallets) {
+		$mysqli = ConnectionPoolManager::getMySQLiConnection();
+		foreach ($wallets as $wallet) {
+			getWalletBalance($wallet['type'], $wallet['address'], $mysqli);
+		}
+		ConnectionPoolManager::releaseMySQLiConnection($mysqli);
+	});
+}
+
+function deleteWallet(string $type, string $address, mixed $conn): void
+{
+	$type = strtoupper($type);
+
+	DPXDBDelete('wallets', [
+		'type' => $type,
+		'address' => $address,
+	], conn: $conn);
 }

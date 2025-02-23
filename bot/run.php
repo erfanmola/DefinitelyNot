@@ -16,12 +16,14 @@ $server->set([
 	'worker_num' => config['PROCESS_WORKER_NUM'],
 ]);
 
-$server->on("start", function (Server $server) {
+$server->on("start", function (Server $server) use (&$cacheTableBalance) {
 	echo "Bot Started";
 	ReportToAdmin("<b>Server has started/reloaded</b>");
+
+	$cacheTableBalance->initCleanpTimer();
 });
 
-$server->on("request", function (Request $SwooleRequest, Response $SwooleResponse) use (&$server) {
+$server->on("request", function (Request $SwooleRequest, Response $SwooleResponse) use (&$server, &$cacheTableBalance) {
 	$SwooleResponse->end();
 
 	$result = $SwooleRequest->getContent();

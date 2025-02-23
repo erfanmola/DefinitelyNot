@@ -7,5 +7,5 @@ if ($flooding === false) {
 
 	require __DIR__ . "/private/default.php";
 } else if ($flooding) {
-	SendMessage($from_id, t('private.flood.message', 'en'));
+	SendMessage($from_id, "🚫 Stop flooding, I'm gonna pretend that i'm angry and will not respond to you for some time.");
 }

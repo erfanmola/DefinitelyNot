@@ -34,5 +34,9 @@ export const createTonWallet = async (): Promise<Wallet> => {
 };
 
 export const getTonBalance = async (address: string): Promise<string> => {
-	return fromNano(await tonClient.getBalance(Address.parse(address)));
+	try {
+		return fromNano(await tonClient.getBalance(Address.parse(address)));
+	} catch (e) {
+		return "-1";
+	}
 };

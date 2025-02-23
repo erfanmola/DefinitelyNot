@@ -6,7 +6,7 @@ $user_params = [
 	'first_name' => $from_name ?? $callback_from_name,
 	'last_name'  => $from_lastname ?? $callback_from_lastname ?? null,
 	'username'   => $from_username ?? $callback_from_username ?? null,
-	'locale'     => $from_language_code ?? $callback_from['language_code'] ?? 'en',
+	// 'locale'     => $from_language_code ?? $callback_from['language_code'] ?? 'en',
 ];
 
 if ($user) {
@@ -27,6 +27,7 @@ if ($user) {
 	}
 } else {
 	$user = createUser($user_params, $mysqli);
+	$user['locale'] = 'en';
 }
 
 $user['wallets'] = getWallets($user['user_id'], $mysqli);
