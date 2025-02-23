@@ -2,7 +2,7 @@
 /*
     Author: Erfan Mola
     https://Developix.ir
-    Version: 1.0.2
+    Version: 1.0.4
 */
 
 function DPXDBQuery(string $table, array|string $fields = '*', array|string $conditions = [], array|string $orders = [], int $limit = -1, int $offset = -1, bool $count_only = false, bool $single_result = true, array $json_fields = [], array $casts = [], &$conn = null): array|int
@@ -90,7 +90,12 @@ function DPXDBQuery(string $table, array|string $fields = '*', array|string $con
 				foreach ($json_fields as $field) {
 
 					if (isset($result[$key][$field])) {
-						$result[$key][$field] = json_decode($result[$key][$field], true);
+						$decoded = json_decode($result[$key][$field], true);
+						if (is_array($decoded)) {
+							$result[$key][$field] = $decoded;
+						} else {
+							$result[$key][$field] = json_decode(stripslashes($result[$key][$field]), true);
+						}
 					}
 				}
 			}
@@ -108,11 +113,25 @@ function DPXDBQuery(string $table, array|string $fields = '*', array|string $con
 							case 'number':
 								$result[$key][$field] = (int)$result[$key][$field];
 								break;
+							case 'double':
+								$result[$key][$field] = (float)$result[$key][$field];
+								break;
+							case 'float':
+								$result[$key][$field] = (float)$result[$key][$field];
+								break;
 							case 'string':
 								$result[$key][$field] = (string)$result[$key][$field];
 								break;
+							case 'boolean':
+								$result[$key][$field] = (bool)$result[$key][$field];
+								break;
 							case 'array':
-								$result[$key][$field] = json_decode($result[$key][$field], true);
+								$decoded = json_decode($result[$key][$field], true);
+								if (is_array($decoded)) {
+									$result[$key][$field] = $decoded;
+								} else {
+									$result[$key][$field] = json_decode(stripslashes($result[$key][$field]), true);
+								}
 								break;
 						}
 					}
@@ -457,5 +476,5 @@ function full_mysqli_real_escape_string(string | null $string): string
 	// For common single-byte charsets (including utf8/utf8mb4) we can use strtr.
 	// (Note: For utf8/utf8mb4, even though they are multi-byte, none of the
 	// bytes in a valid sequence conflict with the escape sequences above.)
-	return $string ? ("'" . strtr($string, $map) . "'") : 'NULL';
+	return is_null($string) ? 'NULL' : ("'" . strtr($string, $map) . "'");
 }

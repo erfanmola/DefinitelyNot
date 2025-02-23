@@ -6,3 +6,12 @@ define('TDXToken', token);
 define('TDXResponse', false);
 define('TDXBotAPIServer', $_ENV['BOT_API_SERVER']);
 define('TDXAdmin', $_ENV['BOT_REPORT_ADMIN_ID']);
+
+define('language_flags', [
+	'en' => '🇺🇸',
+	'fa' => '🇮🇷',
+	'ru' => '🇷🇺',
+	'ar' => '🇸🇦',
+	'de' => '🇩🇪',
+	'hi' => '🇮🇳',
+]);

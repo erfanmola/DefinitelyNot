@@ -1,0 +1,4 @@
+export const config = {
+	PRE_GENERATED_TON_WALLETS: 5,
+	PRE_GENERATED_SOL_WALLETS: 5,
+};
