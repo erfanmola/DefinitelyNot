@@ -8,6 +8,7 @@ import {
 } from "@solana/web3.js";
 
 import type { Wallet } from "../types";
+import bs58 from "bs58";
 import { derivePath } from "ed25519-hd-key";
 import env from "./env";
 
@@ -31,7 +32,7 @@ export const createSolWallet = async (): Promise<Wallet> => {
 		type: "SOL",
 		mnemonic: mnemonic.split(" "),
 		publicKey: keypair.publicKey.toBase58(),
-		secretKey: Buffer.from(keypair.secretKey).toString("hex"),
+		secretKey: bs58.encode(keypair.secretKey),
 		address: keypair.publicKey.toBase58(),
 	};
 };

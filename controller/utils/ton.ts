@@ -1,8 +1,7 @@
-import { Address, TonClient, fromNano } from "@ton/ton";
+import { Address, TonClient, WalletContractV5R1, fromNano } from "@ton/ton";
 import { mnemonicNew, mnemonicToWalletKey } from "@ton/crypto";
 
 import type { Wallet } from "../types";
-import { WalletContractV4 } from "@ton/ton";
 import env from "./env";
 
 const tonClient = new TonClient({
@@ -17,12 +16,12 @@ export const createTonWallet = async (): Promise<Wallet> => {
 
 	const keyPair = await mnemonicToWalletKey(mnemonic);
 
-	const wallet = WalletContractV4.create({
+	const wallet = WalletContractV5R1.create({
 		workchain: 0,
 		publicKey: keyPair.publicKey,
 	});
 
-	const address = wallet.address.toString();
+	const address = wallet.address.toString({ bounceable: false });
 
 	return {
 		type: "TON",
