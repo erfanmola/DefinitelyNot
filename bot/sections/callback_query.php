@@ -1,6 +1,6 @@
 <?php
 
-$flooding = IsUserFlooding($callback_from_id, 8, 30, 'callback_query');
+$flooding = IsUserFlooding($callback_from_id, 12, 30, 'callback_query');
 
 if ($flooding === false) {
 	require __DIR__ . "/../pipelines/define_user_params.php";
