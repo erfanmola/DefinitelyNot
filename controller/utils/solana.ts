@@ -10,10 +10,10 @@ import {
 import type { Wallet } from "../types";
 import bs58 from "bs58";
 import { derivePath } from "ed25519-hd-key";
-import env from "./env";
+import { isMainNet } from "./env";
 
 const connection = new Connection(
-	env.NETWORK === "mainnet"
+	isMainNet
 		? "https://api.mainnet-beta.solana.com"
 		: "https://api.testnet.solana.com",
 );
@@ -45,4 +45,16 @@ export const getSolBalance = async (pubKey: string): Promise<number> => {
 	} catch (e) {
 		return -1;
 	}
+};
+
+export const getSolRate = async (): Promise<number | null> => {
+	const request = await fetch(
+		"https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd",
+	);
+
+	try {
+		return (await request.json()).solana.usd as number;
+	} catch (e) {}
+
+	return null;
 };

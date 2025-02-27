@@ -10,3 +10,12 @@ require_once __DIR__ . "/utils/message.php";
 require_once __DIR__ . "/utils/cache.php";
 
 $cacheTableBalance = new CacheTable(config['CACHE_TABLE_BALANCE_SIZE'], 32);
+
+function &assignReferenceIfNotNull(&$reference, &$fallback = null)
+{
+	if ($reference) {
+		return $reference;
+	}
+
+	return $fallback;
+}

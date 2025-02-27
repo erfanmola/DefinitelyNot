@@ -6,6 +6,9 @@ import {
 import env from "./utils/env";
 import { pipeline } from "./utils/pipeline";
 import { pipelinePregenerateWallets } from "./pipelines/pregenerateWallets";
+import { pipelineStonfiUpdateHandler } from "./pipelines/stonfiUpdateHandler";
+import { pipelineTONUpdateHandler } from "./pipelines/tonUpdateHandler";
+import { pipelineWSUpdateHandler } from "./pipelines/wsUpdateHandler";
 
 const server = Bun.serve({
 	hostname: env.CONTROLLER_HOST,
@@ -32,7 +35,12 @@ const server = Bun.serve({
 	},
 });
 
-pipeline([pipelinePregenerateWallets]);
+pipeline([
+	pipelineTONUpdateHandler,
+	pipelineWSUpdateHandler,
+	pipelineStonfiUpdateHandler,
+	pipelinePregenerateWallets,
+]);
 
 console.log(
 	`Started serving at ${[env.CONTROLLER_HOST, env.CONTROLLER_PORT].join(":")}`,

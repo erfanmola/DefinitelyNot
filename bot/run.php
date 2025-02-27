@@ -3,11 +3,11 @@
 OpenSwoole\Runtime::enableCoroutine();
 OpenSwoole\Coroutine::set(['hook_flags' => SWOOLE_HOOK_ALL]);
 
-use OpenSwoole\Http\Server;
+use OpenSwoole\WebSocket\Server;
 use OpenSwoole\Http\Request;
 use OpenSwoole\Http\Response;
 
-require __DIR__ . "/autoload.php";
+require_once __DIR__ . "/autoload.php";
 
 $server = new Server($_ENV['BOT_HOST'], $_ENV['BOT_PORT']);
 
@@ -49,6 +49,13 @@ $server->on("request", function (Request $SwooleRequest, Response $SwooleRespons
 			}
 		}
 	}
+});
+
+$server->on("message", function (Server $ws, $frame) {
+	$result = json_decode($frame->data, true);
+	if (!$result) return;
+
+	print_r($result);
 });
 
 $server->start();

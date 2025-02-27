@@ -1,4 +1,3 @@
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export const pipeline = async (tasks: (() => Promise<any>)[]) => {
 	const results = [];
 

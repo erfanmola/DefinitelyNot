@@ -1,15 +1,21 @@
 import { Address, TonClient, WalletContractV5R1, fromNano } from "@ton/ton";
+import env, { isMainNet } from "./env";
 import { mnemonicNew, mnemonicToWalletKey } from "@ton/crypto";
 
 import type { Wallet } from "../types";
-import env from "./env";
 
 const tonClient = new TonClient({
-	endpoint:
-		env.NETWORK === "mainnet"
-			? "https://toncenter.com/api/v2/jsonRPC"
-			: "https://testnet.toncenter.com/api/v2/jsonRPC",
+	endpoint: isMainNet
+		? "https://toncenter.com/api/v2/jsonRPC"
+		: "https://testnet.toncenter.com/api/v2/jsonRPC",
+	apiKey: isMainNet ? env.TONCENTER_MAINNET_KEY : env.TONCENTER_TESTNET_KEY,
 });
+
+// const tonClientV4 = new TonClient4({
+// 	endpoint: isMainNet
+// 		? "https://mainnet-v4.tonhubapi.com/"
+// 		: "https://testnet-v4.tonhubapi.com/",
+// });
 
 export const createTonWallet = async (): Promise<Wallet> => {
 	const mnemonic = await mnemonicNew();
@@ -21,7 +27,10 @@ export const createTonWallet = async (): Promise<Wallet> => {
 		publicKey: keyPair.publicKey,
 	});
 
-	const address = wallet.address.toString({ bounceable: false });
+	const address = wallet.address.toString({
+		bounceable: false,
+		testOnly: !isMainNet,
+	});
 
 	return {
 		type: "TON",
