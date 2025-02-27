@@ -1,0 +1,12 @@
+[package]
+name = "controlle-rs"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+sonic-rs = "0.3"
+ureq = "3.0.6"
+serde = "1.0.218"
+
+[lib]
+crate-type = ["cdylib"]
