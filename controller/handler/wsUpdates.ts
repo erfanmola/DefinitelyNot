@@ -11,6 +11,7 @@ export const wsUpdateHandler = async () => {
 		if (ws.readyState === ws.CLOSED) {
 			ws.terminate();
 			ws = new WebSocket(`ws://${env.BOT_HOST}:${env.BOT_PORT}`);
+			wsData = "";
 		}
 	} else {
 		const data = JSON.stringify({
