@@ -23,7 +23,7 @@ $server->on("start", function (Server $server) use (&$cacheTableBalance) {
 	$cacheTableBalance->initCleanpTimer();
 });
 
-$server->on("request", function (Request $SwooleRequest, Response $SwooleResponse) use (&$server, &$cacheTableBalance) {
+$server->on("request", function (Request $SwooleRequest, Response $SwooleResponse) use (&$server, &$cacheTableBalance, &$tableJettons) {
 	$SwooleResponse->end();
 
 	$result = $SwooleRequest->getContent();
@@ -51,11 +51,15 @@ $server->on("request", function (Request $SwooleRequest, Response $SwooleRespons
 	}
 });
 
-$server->on("message", function (Server $ws, $frame) {
+$server->on("message", function (Server $ws, $frame) use (&$tableJettons) {
 	$result = json_decode($frame->data, true);
-	if (!$result) return;
+	if (!$result && isset($result['type'])) return;
 
-	print_r($result);
+	if ($result['type'] === 'rates') {
+		require __DIR__ . "/events/rates.php";
+	} else if ($result['type'] === 'init') {
+		require __DIR__ . "/events/init.php";
+	}
 });
 
 $server->start();

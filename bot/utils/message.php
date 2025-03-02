@@ -23,12 +23,12 @@ function generateMessageDefaultButtons(mixed $user): array
 		],
 		[
 			[
-				'text' => t('private.default.buttons.copy', $user['locale']),
-				'callback_data' => 'copytrade',
+				'text' => t('private.default.buttons.trade', $user['locale']),
+				'callback_data' => 'trade',
 			],
 			[
-				'text' => t('private.default.buttons.limit', $user['locale']),
-				'callback_data' => 'limit',
+				'text' => t('private.default.buttons.copy', $user['locale']),
+				'callback_data' => 'copytrade',
 			],
 		],
 		[

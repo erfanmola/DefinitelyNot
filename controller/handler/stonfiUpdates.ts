@@ -1,4 +1,7 @@
-import { contractsData, trackingContracts } from "../store";
+import { assetsData, trackingContracts } from "../store";
+
+import type { StonfiContractData } from "../types";
+import { objectEquals } from "../utils/object";
 
 export const stonfiUpdates = async () => {
 	const fetchedContracts = (
@@ -20,15 +23,36 @@ export const stonfiUpdates = async () => {
 		.filter(Boolean)
 		.map((item: any) => item.asset);
 
-	for (const contract of fetchedContracts) {
-		const currentContractIndex = contractsData.TON.stonfi.findIndex(
-			(item) => item.contract_address === contract.contract_address,
+	for (const contractFull of fetchedContracts) {
+		const currentContractIndex = assetsData.jettons.stonfi.findIndex(
+			(item) => item.contract_address === contractFull.contract_address,
 		);
 
+		const contract: StonfiContractData = {
+			blacklisted: contractFull.blacklisted,
+			community: contractFull.community,
+			contract_address: contractFull.contract_address,
+			default_symbol: contractFull.default_symbol,
+			deprecated: contractFull.deprecated,
+			display_name: contractFull.display_name,
+			kind: contractFull.kind,
+			symbol: contractFull.symbol,
+			decimals: contractFull.decimals,
+			dex_price_usd: contractFull.dex_price_usd,
+			dex_usd_price: contractFull.dex_usd_price,
+			updated: false,
+		};
+
 		if (currentContractIndex > -1) {
-			contractsData.TON.stonfi[currentContractIndex] = contract;
+			if (
+				!objectEquals(contract, assetsData.jettons.stonfi[currentContractIndex])
+			) {
+				contract.updated = true;
+				assetsData.jettons.stonfi[currentContractIndex] = contract;
+			}
 		} else {
-			contractsData.TON.stonfi.push(contract);
+			contract.updated = true;
+			assetsData.jettons.stonfi.push(contract);
 		}
 	}
 
@@ -41,7 +65,7 @@ export const stonfiUpdatesFFI = async () => {
 	);
 
 	worker.onmessage = (event) => {
-		contractsData.TON.stonfi = event.data;
+		assetsData.jettons.stonfi = event.data;
 	};
 
 	const handler = () => {

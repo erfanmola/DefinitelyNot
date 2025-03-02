@@ -8,7 +8,7 @@ if ($wallet_index > -1) {
 	$wallet = $user['wallets'][$wallet_index];
 
 	EditMessageText($callback_chat_id, $callback_msg_id, td(
-		t('callback_query.wallet_info.text', $user['locale']),
+		t('callback_query.trade_info.text', $user['locale']),
 		[
 			'wallet' => generateWalletsListText([$wallet], $user['locale']),
 		]
@@ -17,27 +17,31 @@ if ($wallet_index > -1) {
 			'inline_keyboard' => [
 				[
 					[
-						'text' => t('callback_query.wallet_info.buttons.export', $user['locale']),
-						'callback_data' => joinPipe('wallet', 'export', $wallet['id']),
+						'text' => t('callback_query.trade_info.buttons.limit', $user['locale']),
+						'callback_data' => joinPipe('ex', 'lim', $wallet['id']),
 					],
 				],
 				[
 					[
-						'text' => t('callback_query.wallet_info.buttons.delete', $user['locale']),
-						'callback_data' => joinPipe('wallet', 'del', $wallet['id']),
+						'text' => t('callback_query.trade_info.buttons.tp', $user['locale']),
+						'callback_data' => joinPipe('ex', 'tp', $wallet['id']),
+					],
+					[
+						'text' => t('callback_query.trade_info.buttons.sl', $user['locale']),
+						'callback_data' => joinPipe('ex', 'sl', $wallet['id']),
 					],
 				],
 				[
 					[
 						'text' => t('general.back', $user['locale']),
-						'callback_data' => 'wallets',
+						'callback_data' => 'trade',
 					],
 				],
 			],
 		],
 	]);
 
-	$answer = t('callback_query.wallet_info.answer', $user['locale']);
+	$answer = t('callback_query.trade_info.answer', $user['locale']);
 
 	syncWalletsBalanceDeferred([$wallet]);
 }

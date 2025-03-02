@@ -1,3 +1,5 @@
+import type { number } from "zod";
+
 export type WalletType = "SOL" | "TON";
 
 export type Wallet = {
@@ -35,11 +37,22 @@ export type StonfiContractData = {
 	default_symbol: boolean;
 	dex_usd_price?: string;
 	dex_price_usd?: string;
+	updated?: boolean;
 };
 
-export type ContractsData = {
-	TON: {
-		stonfi: StonfiContractData[];
-	};
-	SOL: [];
+export type AssetsData = {
+	jettons: { stonfi: StonfiContractData[] };
+	tokens: { meteora: null };
+};
+
+export type WSMessageInit = {
+	type: "init";
+	jettons: Jetton[];
+	tokens: [];
+};
+
+export type WSMessageRates = {
+	type: "rates";
+	native: Record<WalletType, number>;
+	assets: AssetsData;
 };

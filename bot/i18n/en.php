@@ -17,7 +17,7 @@ defined('i18n_en') or define('i18n_en', [
 				'alerts'    => '🔔 Alerts',
 				'import'    => '🔑 Import Wallet',
 				'copy'      => '👁‍🗨 Copy Trade',
-				'limit'     => '💢 Limit Order',
+				'trade'     => '💸 Trade Conditions',
 				'languages' => 'Language',
 			],
 		],
@@ -95,6 +95,39 @@ defined('i18n_en') or define('i18n_en', [
 		'languages' => [
 			'answer' => 'Languages',
 			'text'   => 'Please select your desired language:',
+		],
+		'trade' => [
+			'answer' => '💸 Trade Conditions 💸',
+			'text'   => joinDoubleLine(
+				'💡 You can automate your trades based on conditions.',
+				"%wallets%",
+				'💳 Please select a wallet to set trading conditions:',
+			),
+		],
+		'trade_custom' => [
+			'answer' => 'Please send the contract address of the asset on %type% blockchain.',
+			'buttons' => [
+				'custom' => 'Custom Address',
+			],
+		],
+		'trade_info' => [
+			'answer' => '💸 Trade Conditions 💸',
+			'text'   => joinDoubleLine(
+				'💡 You can automate your trades based on conditions.',
+				"%wallet%",
+			),
+			'buttons' => [
+				'limit' => '💢 Limit Order',
+				'tp'    => '💰 Take Profit',
+				'sl'    => '🛑 Stop Loss',
+			],
+		],
+		'trade_limit' => [
+			'answer' => '💢 Limit Order 💢',
+			'text'   => joinDoubleLine(
+				"🎯 Please choose the target asset you would like to buy with your <b>%type%</b>. If your target asset is not listed below, you can choose custom address address.",
+				"%wallet%",
+			),
 		],
 	],
 	'general' => [

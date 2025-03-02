@@ -1,8 +1,8 @@
 <?php
 
-[,, $address] = splitPipe($callback_data);
+[,, $wallet_id] = splitPipe($callback_data);
 
-$wallet_index = array_search($address, array_column($user['wallets'], 'address'));
+$wallet_index = array_search($wallet_id, array_column($user['wallets'], 'id'));
 
 if ($wallet_index > -1) {
 	$wallet = $user['wallets'][$wallet_index];
@@ -30,7 +30,7 @@ if ($wallet_index > -1) {
 				[
 					[
 						'text' => t('general.back', $user['locale']),
-						'callback_data' => joinPipe('wallet', 'info', $wallet['address']),
+						'callback_data' => joinPipe('wallet', 'info', $wallet['id']),
 					],
 				],
 			],

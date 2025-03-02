@@ -23,8 +23,8 @@ if ($flooding === false) {
 			require __DIR__ . "/callback_query/copytrade.php";
 			break;
 
-		case 'limit':
-			require __DIR__ . "/callback_query/limit_order.php";
+		case 'trade':
+			require __DIR__ . "/callback_query/trade.php";
 			break;
 
 		case 'languages':
@@ -53,6 +53,15 @@ if ($flooding === false) {
 				require __DIR__ . "/callback_query/wallet_delete.php";
 			} else if (str_starts_with($callback_data, joinPipe('wallet', 'export', ''))) {
 				require __DIR__ . "/callback_query/wallet_export.php";
+			}
+
+			// Trade Operations
+			if (str_starts_with($callback_data, joinPipe('ex', 'info', ''))) {
+				require __DIR__ . "/callback_query/trade_info.php";
+			} else if (str_starts_with($callback_data, joinPipe('ex', 'lim', ''))) {
+				require __DIR__ . "/callback_query/trade_limit.php";
+			} else if (str_starts_with($callback_data, joinPipe('ex', 'addr', ''))) {
+				require __DIR__ . "/callback_query/trade_custom.php";
 			}
 
 			// Language Operations

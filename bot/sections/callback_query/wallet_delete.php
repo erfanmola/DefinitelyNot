@@ -1,9 +1,9 @@
 <?php
 
 if (count($user['wallets']) > config['TOTAL_WALLETS_MIN']) {
-	[,, $address] = splitPipe($callback_data);
+	[,, $wallet_id] = splitPipe($callback_data);
 
-	$wallet_index = array_search($address, array_column($user['wallets'], 'address'));
+	$wallet_index = array_search($wallet_id, array_column($user['wallets'], 'id'));
 
 	if ($wallet_index > -1) {
 		$wallet = $user['wallets'][$wallet_index];

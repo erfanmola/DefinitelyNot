@@ -5,25 +5,27 @@ if (count($user['wallets']) < config['TOTAL_WALLETS_MAX']) {
 
 	$wallet = createWallet($user['user_id'], $type, $mysqli);
 
-	EditMessageText($callback_chat_id, $callback_msg_id, td(
-		t('callback_query.create_wallet.text', $user['locale']),
-		[
-			'wallet' => generateWalletsListText([$wallet], $user['locale']),
-		]
-	), null, [
-		'reply_markup' => [
-			'inline_keyboard' => [
-				[
+	if ($wallet) {
+		EditMessageText($callback_chat_id, $callback_msg_id, td(
+			t('callback_query.create_wallet.text', $user['locale']),
+			[
+				'wallet' => generateWalletsListText([$wallet], $user['locale']),
+			]
+		), null, [
+			'reply_markup' => [
+				'inline_keyboard' => [
 					[
-						'text' => t('general.back', $user['locale']),
-						'callback_data' => 'wallets',
+						[
+							'text' => t('general.back', $user['locale']),
+							'callback_data' => 'wallets',
+						],
 					],
 				],
 			],
-		],
-	]);
+		]);
 
-	$answer = t('callback_query.create_wallet.answer', $user['locale']);
+		$answer = t('callback_query.create_wallet.answer', $user['locale']);
+	}
 } else {
 	$answer = td(t('callback_query.create_wallet.answer_max', $user['locale']), [
 		'max' => config['TOTAL_WALLETS_MAX'],

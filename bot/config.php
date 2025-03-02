@@ -9,4 +9,6 @@ defined('config') or define('config', [
 	'TOTAL_WALLETS_MAX' => 4,
 	'CACHE_TABLE_BALANCE_SIZE' => 1024,
 	'CACHE_TABLE_BALANCE_TIME' => 30, // Seconds
+	'TABLE_JETTONS_SIZE' => 128,
+	'TABLE_TOKENS_SIZE' => 128,
 ]);

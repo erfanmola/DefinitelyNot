@@ -10,7 +10,7 @@ EditMessageText($callback_chat_id, $callback_msg_id, td(t('callback_query.wallet
 			...array_map(fn($wallet) => [
 				[
 					'text' => joinSpace(blockchain_emoji[$wallet['type']], truncateWalletAddress($wallet['address'])),
-					'callback_data' => joinPipe('wallet', 'info', $wallet['address']),
+					'callback_data' => joinPipe('wallet', 'info', $wallet['id']),
 				],
 				[
 					'text' => t('callback_query.wallets.buttons.copy', $user['locale']),

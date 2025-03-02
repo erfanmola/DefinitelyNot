@@ -9,7 +9,8 @@ require_once __DIR__ . "/utils/promise.php";
 require_once __DIR__ . "/utils/message.php";
 require_once __DIR__ . "/utils/cache.php";
 
-$cacheTableBalance = new CacheTable(config['CACHE_TABLE_BALANCE_SIZE'], 32);
+require_once __DIR__ . "/information/balance.php";
+require_once __DIR__ . "/information/assets.php";
 
 function &assignReferenceIfNotNull(&$reference, &$fallback = null)
 {
