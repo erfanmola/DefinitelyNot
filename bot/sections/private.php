@@ -4,6 +4,7 @@ $flooding = IsUserFlooding($from_id, 8, 60);
 
 if ($flooding === false) {
 	require __DIR__ . "/../pipelines/define_user_params.php";
+	require __DIR__ . "/../pipelines/define_user_wallets.php";
 
 	if ($state && !str_starts_with($text, '/start')) {
 		switch ($state) {

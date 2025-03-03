@@ -13,13 +13,15 @@ defined('i18n_en') or define('i18n_en', [
 				"🫰 For testing purposes, you can create orders with zero balance in the wallet.",
 			),
 			'buttons' => [
-				'wallets'   => '💳 Wallets',
-				'refresh'   => '🔄 Refresh',
-				'alerts'    => '🔔 Alerts',
-				'import'    => '🔑 Import Wallet',
-				'copy'      => '👁‍🗨 Copy Trade',
-				'trade'     => '💸 Trade Conditions',
-				'languages' => 'Language',
+				'wallets'    => '💳 Wallets',
+				'refresh'    => '🔄 Refresh',
+				'swap'       => '⚡️ Instant Swap',
+				'conditions' => '🗒 Conditions List',
+				'alerts'     => '🔔 Alerts',
+				'import'     => '🔑 Import Wallet',
+				'copy'       => '👁‍🗨 Copy Trade',
+				'trade'      => '💸 Trade Conditions',
+				'languages'  => 'Language',
 			],
 		],
 		'trade_custom' => [
@@ -50,6 +52,14 @@ defined('i18n_en') or define('i18n_en', [
 				'new' => 'Create new wallet',
 				'copy' => 'Copy Address',
 			],
+		],
+		'conditions' => [
+			'answer' => '🗒 Trade Conditions 🗒',
+			'text'   => joinDoubleLine(
+				"💡 You have <b>%count%</b> pending trade conditions (Max: %max%)",
+				"%conditions%",
+				"⚙️ You can manage each condition by clicking the buttons below"
+			),
 		],
 		'create' => [
 			'answer' => '🔗 Create Wallet 🔗',
@@ -83,6 +93,7 @@ defined('i18n_en') or define('i18n_en', [
 			'answer_min' => '🚫 You must have at least %min% active wallets.',
 			'text' => joinDoubleLine(
 				"<b>Are you the hell certain of deleting this wallet?</b> There is no way to restore it if you haven't exported it and saved it yourself.",
+				"Also note that by deleting the wallet, all trade orders for the wallet will be wiped out.",
 				'%wallet%',
 				"If you aren't drunk, then click on the ⏹️ button to delete the wallet.",
 			),
@@ -144,14 +155,41 @@ defined('i18n_en') or define('i18n_en', [
 					),
 					"%wallet%",
 				),
-				'price' => 'Please enter the price target for buying <b>%symbol%</b> by <b>%type%</b> in <b>USD</b> (eg: %price%):'
+				'price' => 'Please enter the price target for buying <b>%symbol%</b> by <b>%type%</b> in <b>USD</b> (eg: <code>%price%</code>):',
+				'amount' => 'Please enter the amount of <b>%symbol%</b> to buy when it reaches <b>%price%</b>:',
+				'success' => '✅ Your Limit Order for buying <b>%amount% %symbol%</b> when <b>%symbol%</b> reaches <b>%price%</b> has been placed successfully. You can use /start to continue.',
+				'errors' => [
+					'price_invalid' => 'The price you entered is not a valid numeric price. Please enter a valid price. You can use /start to cancel.',
+					'price_higher'  => 'The price you entered is already higher than the current <b>%price%</b>, you can use instant trade. Please enter a valid price. You can use /start to cancel.',
+					'amount_invalid' => 'The amount you entered is not a valid numeric amount. Please enter a valid amount. You can use /start to cancel.',
+				],
 			],
+		],
+		'condition_info' => [
+			'answer' => '🗒 Condition Info 🗒',
+			'text' => joinDoubleLine(
+				'🗒 Here is your condition:',
+				'%condition%',
+				'⚙️ You can manage condition by clicking the buttons below.',
+			),
+			'buttons' => [
+				'delete' => '❌ Delete Condition',
+			],
+		],
+		'condition_del' => [
+			'answer' => '❌ Condition Delete ❌',
+			'text' => joinDoubleLine(
+				"<b>Are you sure of deleting this condition?</b>",
+				'%condition%',
+				"If you aren't drunk, then click on the ⏹️ button to delete the condition.",
+			),
 		],
 		'general' => [
 			'buttons' => [
 				'price' => 'Enter Price',
 			],
 			'expired' => '⚠️ This message is expired, please use the latest message for interactions.',
+			'max_conditions' => '🚫 You already have reached the limit of <b>%max%</b> number of active trade conditions, please delete some before you continue.',
 		],
 	],
 	'general' => [

@@ -78,3 +78,15 @@ define('not_art', [
 		'⬛️⬛️⬛️⬛️⬛️⬛️⬛️⬛️⬛️',
 	]
 ]);
+
+define('trade_condition_types', [
+	0 => 'limit',
+	1 => 'sl',
+	2 => 'tp',
+]);
+
+define('trade_condition_types_symbol', [
+	0 => 'Limit',
+	1 => 'SL',
+	2 => 'TP',
+]);

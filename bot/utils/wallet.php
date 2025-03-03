@@ -107,6 +107,21 @@ function deleteWallet(string $type, string $address, mixed &$conn): void
 {
 	$type = strtoupper($type);
 
+	$wallet = DPXDBQuery('wallets', ['user_id', 'id'], [
+		'type' => $type,
+		'address' => $address,
+	], conn: $conn);
+
+	if ($wallet) {
+		$conditions = DPXDBQuery('trade_conditions', ['id'], [
+			'wallet_id' => $wallet['id']
+		], single_result: false, conn: $conn);
+
+		foreach ($conditions as $condition) {
+			deleteTradeCondition($condition['id'], $conn);
+		}
+	}
+
 	DPXDBDelete('wallets', [
 		'type' => $type,
 		'address' => $address,

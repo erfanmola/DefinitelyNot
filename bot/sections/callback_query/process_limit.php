@@ -25,6 +25,7 @@ if ($wallet_index > -1) {
 		'state' => 'price',
 		'wallet_id' => $wallet['id'],
 		'blockchain' => $wallet['type'],
+		'asset_address' => $asset_address,
 	]);
 
 	SendMessage($callback_chat_id, td(t('callback_query.trade_limit.condition.price', $user['locale']), [

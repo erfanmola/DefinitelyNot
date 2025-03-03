@@ -11,4 +11,5 @@ defined('config') or define('config', [
 	'CACHE_TABLE_BALANCE_TIME' => 30, // Seconds
 	'TABLE_JETTONS_SIZE' => 128,
 	'TABLE_TOKENS_SIZE' => 128,
+	'TRADE_CONDITIONS_PENDING_MAX' => 10,
 ]);

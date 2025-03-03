@@ -1,9 +1,10 @@
 <?php
 
-$flooding = IsUserFlooding($callback_from_id, 12, 30, 'callback_query');
+$flooding = IsUserFlooding($callback_from_id, 16, 30, 'callback_query');
 
 if ($flooding === false) {
 	require __DIR__ . "/../pipelines/define_user_params.php";
+	require __DIR__ . "/../pipelines/define_user_wallets.php";
 
 	$active_msg_id = $redis->get(joinUnderline($callback_from_id, 'recent', 'msg', 'id'));
 
@@ -16,6 +17,10 @@ if ($flooding === false) {
 
 			case 'wallets':
 				require __DIR__ . "/callback_query/wallets.php";
+				break;
+
+			case 'conditions':
+				require __DIR__ . "/callback_query/conditions.php";
 				break;
 
 			case 'create':
@@ -56,6 +61,15 @@ if ($flooding === false) {
 					require __DIR__ . "/callback_query/wallet_delete.php";
 				} else if (str_starts_with($callback_data, joinPipe('wallet', 'export', ''))) {
 					require __DIR__ . "/callback_query/wallet_export.php";
+				}
+
+				// Conditions Operations
+				if (str_starts_with($callback_data, joinPipe('condition', 'info', ''))) {
+					require __DIR__ . "/callback_query/conditions_info.php";
+				} else if (str_starts_with($callback_data, joinPipe('condition', 'del', ''))) {
+					require __DIR__ . "/callback_query/conditions_del.php";
+				} else if (str_starts_with($callback_data, joinPipe('condition', 'delete', ''))) {
+					require __DIR__ . "/callback_query/conditions_delete.php";
 				}
 
 				// Trade Operations
