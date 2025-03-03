@@ -28,6 +28,7 @@ if ($user) {
 } else {
 	$user = createUser($user_params, $mysqli);
 	$user['locale'] = 'en';
+	$user['new'] = true;
 }
 
 $user['wallets'] = getWallets($user['user_id'], $mysqli);
@@ -38,3 +39,8 @@ if (empty($user['wallets'])) {
 		createWallet($user['user_id'], 'SOL', $mysqli),
 	];
 }
+
+[
+	'state' => $state,
+	'sdata' => $sdata,
+] = getState($from_id ?? $callback_from_id, $redis);

@@ -16,7 +16,7 @@ export const nativeAssetsRate: Record<WalletType, number> = {
 export const trackingContracts: Record<WalletType, string[]> = {
 	SOL: [],
 	TON: tonJettons[isMainNet ? "mainnet" : "testnet"].map(
-		(item) => item.contract,
+		(item) => item.address,
 	),
 };
 

@@ -8,6 +8,8 @@ require_once __DIR__ . "/utils/controller.php";
 require_once __DIR__ . "/utils/promise.php";
 require_once __DIR__ . "/utils/message.php";
 require_once __DIR__ . "/utils/cache.php";
+require_once __DIR__ . "/utils/state.php";
+require_once __DIR__ . "/utils/table.php";
 
 require_once __DIR__ . "/information/balance.php";
 require_once __DIR__ . "/information/assets.php";

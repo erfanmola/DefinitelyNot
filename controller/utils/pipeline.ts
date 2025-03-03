@@ -6,13 +6,13 @@ export const pipeline = async (tasks: (() => Promise<any>)[]) => {
 			const abortController = new AbortController();
 			const { signal } = abortController;
 
-			const sleepPromise = new Promise((resolve, reject) => {
+			const sleepPromise = new Promise((resolve) => {
 				const timeoutId = setTimeout(resolve, 60_000);
 
 				if (signal) {
 					signal.addEventListener("abort", () => {
 						clearTimeout(timeoutId);
-						reject(false);
+						resolve(false);
 					});
 				}
 			});

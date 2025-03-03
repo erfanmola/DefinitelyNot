@@ -3,6 +3,7 @@ import {
 	controllerWalletCreate,
 } from "./sections/controllerWallet";
 
+import { controllerAssetsTrack } from "./sections/controllerAsset";
 import env from "./utils/env";
 import { pipeline } from "./utils/pipeline";
 import { pipelinePregenerateWallets } from "./pipelines/pregenerateWallets";
@@ -26,6 +27,8 @@ const server = Bun.serve({
 				return await controllerWalletCreate(body);
 			case ["POST", "/wallet/balance"].join("|"):
 				return await controllerWalletBalance(body);
+			case ["POST", "/assets/track"].join("|"):
+				return await controllerAssetsTrack(body);
 		}
 
 		return Response.json({

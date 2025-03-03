@@ -13,7 +13,17 @@ export type Wallet = {
 export type Jetton = {
 	name: string;
 	symbol: string;
-	contract: string;
+	address: string;
+};
+
+export type Token = {
+	name: string;
+	symbol: string;
+	address: string;
+};
+
+export type Asset = (Jetton | Token) & {
+	type: WalletType;
 };
 
 export type ControllerWalletCreateParams = {
@@ -23,6 +33,13 @@ export type ControllerWalletCreateParams = {
 export type ControllerWalletBalanceParams = {
 	type: WalletType;
 	address: string;
+};
+
+export type ControllerAssetsTrackParams = {
+	assets: {
+		type: WalletType;
+		address: string;
+	}[];
 };
 
 export type StonfiContractData = {

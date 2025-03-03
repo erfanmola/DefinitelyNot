@@ -12,13 +12,16 @@ if ($wallet_index > -1) {
 	switch ($wallet['type']) {
 		case 'TON':
 			foreach ($tableJettons as $jetton) {
-				$keyboard[] = [
-					'text' => $jetton['symbol'],
-					'callback_data' => joinPipe('ex', 'lim', $wallet['id'], $jetton['contract']),
-				];
+				if ($jetton['active'] && $jetton['symbol']) {
+					$keyboard[] = [
+						'text' => $jetton['symbol'],
+						'callback_data' => joinPipe('ex', 'lim', $wallet['id'], $jetton['address']),
+					];
+				}
 			}
 			break;
 		case 'SOL':
+			// TODO: Implement
 			break;
 	}
 
@@ -35,7 +38,7 @@ if ($wallet_index > -1) {
 				[
 					[
 						'text' => t('callback_query.trade_custom.buttons.custom', $user['locale']),
-						'callback_data' => joinPipe('ex', 'addr', $wallet['id']),
+						'callback_data' => joinPipe('ex', 'addr', $wallet['id'], 'lim'),
 					],
 				],
 				[

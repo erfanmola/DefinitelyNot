@@ -5,11 +5,12 @@ defined('i18n_en') or define('i18n_en', [
 		'default' => [
 			'text' => joinDoubleLine(
 				"Welcome to <b>%bot_title%</b> 🙅‍♂️",
-				"I'm the best trading bot you can get with 2-3 days of work and almost zero experience with blockchain.",
+				"I'm Definitely Not the best bot you can get with almost zero experience with blockchain.",
 				"👛 Here are your wallets:",
 				"%wallets%",
 				"💡 For more info on your wallet and to retrieve your private key, tap the wallets button.",
 				"🔑 You can also import your existing wallets and bet on whether you will be scammed or Not, perhaps? %bot_title%!",
+				"🫰 For testing purposes, you can create orders with zero balance in the wallet.",
 			),
 			'buttons' => [
 				'wallets'   => '💳 Wallets',
@@ -20,6 +21,12 @@ defined('i18n_en') or define('i18n_en', [
 				'trade'     => '💸 Trade Conditions',
 				'languages' => 'Language',
 			],
+		],
+		'trade_custom' => [
+			'invalid_address' => 'Please send a valid <b>%type%</b> asset address. You can use /start to cancel.',
+			'processing' => '⏳ Please wait while we process the asset...',
+			'invalid_asset' => '❌ Unfortunately we are unable to process this asset.',
+			'inactive' => '🚫 This asset is currently not available for swaps in the DEX.',
 		],
 	],
 	'inline_query' => [
@@ -105,7 +112,7 @@ defined('i18n_en') or define('i18n_en', [
 			),
 		],
 		'trade_custom' => [
-			'answer' => 'Please send the contract address of the asset on %type% blockchain.',
+			'answer' => 'Please send the contract address of the asset on %type% blockchain. You can use /start to cancel.',
 			'buttons' => [
 				'custom' => 'Custom Address',
 			],
@@ -128,6 +135,23 @@ defined('i18n_en') or define('i18n_en', [
 				"🎯 Please choose the target asset you would like to buy with your <b>%type%</b>. If your target asset is not listed below, you can choose custom address address.",
 				"%wallet%",
 			),
+			'condition' => [
+				'text' => joinDoubleLine(
+					"<b>💢 Limit Order</b>",
+					joinLine(
+						"🪙 %name% (<b>%symbol%</b>) (<b>%price%</b>)",
+						"<code>%address%</code>"
+					),
+					"%wallet%",
+				),
+				'price' => 'Please enter the price target for buying <b>%symbol%</b> by <b>%type%</b> in <b>USD</b> (eg: %price%):'
+			],
+		],
+		'general' => [
+			'buttons' => [
+				'price' => 'Enter Price',
+			],
+			'expired' => '⚠️ This message is expired, please use the latest message for interactions.',
 		],
 	],
 	'general' => [

@@ -8,13 +8,16 @@ export const stonfiUpdates = async () => {
 		await Promise.all(
 			trackingContracts.TON.map(
 				(address) =>
-					new Promise((resolve, reject) => {
+					new Promise((resolve) => {
 						try {
 							fetch(`https://api.ston.fi/v1/assets/${address}`).then((data) => {
-								data.json().then(resolve);
+								data
+									.json()
+									.then(resolve)
+									.catch(() => resolve(null));
 							});
 						} catch (e) {
-							reject(null);
+							resolve(null);
 						}
 					}),
 			),

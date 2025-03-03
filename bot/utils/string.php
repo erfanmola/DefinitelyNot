@@ -44,3 +44,8 @@ function splitPipe(string $string)
 {
 	return explode('|', $string);
 }
+
+function priceFormat(string|int|float $price, int $decimals = 9, string $prefix = '$')
+{
+	return joinEmpty($prefix, round($price, $decimals));
+}

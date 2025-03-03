@@ -2,7 +2,7 @@
 
 use OpenSwoole\Coroutine;
 
-function getWallets(int|string $user_id, mixed $conn): array | null
+function getWallets(int|string $user_id, mixed &$conn): array | null
 {
 	return DPXDBQuery('wallets', '*', ['user_id' => $user_id], casts: [
 		'id'       => 'number',
@@ -12,7 +12,7 @@ function getWallets(int|string $user_id, mixed $conn): array | null
 	], single_result: false, conn: $conn);
 }
 
-function createWallet(int|string $user_id, string $type, mixed $conn): array | null
+function createWallet(int|string $user_id, string $type, mixed &$conn): array | null
 {
 	$type = strtoupper($type);
 	$result = requestController('/wallet/create', [
@@ -38,7 +38,7 @@ function createWallet(int|string $user_id, string $type, mixed $conn): array | n
 	return null;
 }
 
-function getWalletBalance(string $type, string $address, mixed $conn): float
+function getWalletBalance(string $type, string $address, mixed &$conn): float
 {
 	global $cacheTableBalance;
 
@@ -103,7 +103,7 @@ function syncWalletsBalanceDeferred(array $wallets)
 	});
 }
 
-function deleteWallet(string $type, string $address, mixed $conn): void
+function deleteWallet(string $type, string $address, mixed &$conn): void
 {
 	$type = strtoupper($type);
 
