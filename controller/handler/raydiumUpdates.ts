@@ -53,5 +53,5 @@ export const raydiumUpdates = async () => {
 		console.error("unable to fetch");
 	}
 
-	setTimeout(raydiumUpdates, 3e3);
+	setTimeout(raydiumUpdates, 5e3);
 };
