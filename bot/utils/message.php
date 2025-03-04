@@ -5,6 +5,7 @@ function generateMessageDefaultText(mixed $user): string
 	return td(t('private.default.text', $user['locale']), [
 		'bot_title' => 'Definitely Not',
 		'wallets'   => generateWalletsListText($user['wallets'], $user['locale']),
+		'prices'    => generateNativePricesText(),
 	]);
 }
 
@@ -47,8 +48,8 @@ function generateMessageDefaultButtons(mixed $user): array
 				'callback_data' => 'languages',
 			],
 			[
-				'text' => t('private.default.buttons.copy', $user['locale']),
-				'callback_data' => 'copytrade',
+				'text' => t('private.default.buttons.rates', $user['locale']),
+				'url' => joinEmpty("https://t.me/", $_ENV['RATES_CHANNEL_USERNAME']),
 			],
 		],
 		[
@@ -56,11 +57,15 @@ function generateMessageDefaultButtons(mixed $user): array
 				'text' => t('private.default.buttons.import', $user['locale']),
 				'callback_data' => 'import_wallet',
 			],
+			[
+				'text' => t('private.default.buttons.copy', $user['locale']),
+				'callback_data' => 'copytrade',
+			],
 		],
 	];
 }
 
-function generateWalletsListText(array $wallets, string $locale)
+function generateWalletsListText(array $wallets, string $locale): string
 {
 	return joinDoubleLine(...array_map(
 		fn($wallet) => joinLine(
@@ -77,7 +82,7 @@ function generateWalletsListText(array $wallets, string $locale)
 	));
 }
 
-function generateTradeConditionsListText(array $conditions)
+function generateTradeConditionsListText(array $conditions): string
 {
 	return joinDoubleLine(...array_map(
 		fn($condition) => joinLine(
@@ -94,4 +99,65 @@ function generateTradeConditionsListText(array $conditions)
 		),
 		$conditions
 	));
+}
+
+function generateNativePricesText(): string
+{
+	global $tableNative;
+
+	$items = [];
+
+	foreach (['TON', 'SOL'] as $type) {
+		$price = $tableNative->get($type, 'price');
+
+		if ($price) {
+			$string = match ($type) {
+				'TON' => '💎',
+				'SOL' => '🧬',
+			};
+			$string .= " <b>{$type}: " . priceFormat($price, 4) . "</b>";
+			$items[] = $string;
+		}
+	}
+
+	return joinLine(...$items);
+}
+
+function generateAssetPricesText(string $type, string $emoji = ''): string
+{
+	$items = [];
+
+	switch ($type) {
+		case 'TON':
+			global $tableJettons, $predefinedJettons;
+
+			foreach ($tableJettons as $jetton) {
+				if ($jetton['active'] && $jetton['price'] && $jetton['symbol'] && $predefinedJettons->exists($jetton['address'])) {
+					$items[] = $jetton;
+				}
+			}
+			break;
+
+		case 'SOL':
+			global $tableTokens, $predefinedTokens;
+
+			foreach ($tableTokens as $token) {
+				if ($token['active'] && $token['price'] && $token['symbol'] && $predefinedTokens->exists($token['address'])) {
+					$items[] = $token;
+				}
+			}
+			break;
+	}
+
+	$items = array_map(
+		fn($item) =>
+		joinSpace(
+			$emoji,
+			joinEmpty($item['symbol'], ':'),
+			priceFormat($item['price'], 6),
+		),
+		$items
+	);
+
+	return joinLine(...$items);
 }

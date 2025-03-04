@@ -1,5 +1,9 @@
 <?php
 
+foreach ($result['native'] as $key => $value) {
+	$tableNative->set($key, ['price' => (float)$value]);
+}
+
 foreach ($result['assets']['jettons']['stonfi'] as $asset) {
 	if (isset($asset['dex_usd_price'])) {
 		tableUpdate($tableJettons, $asset['contract_address'], [

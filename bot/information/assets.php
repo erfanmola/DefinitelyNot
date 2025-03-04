@@ -2,6 +2,13 @@
 
 use OpenSwoole\Table;
 
+$tableNative = new Table(2);
+$tableNative->column('price', Table::TYPE_FLOAT);
+$tableNative->create();
+
+$tableNative->set('TON', ['price' => (float)0]);
+$tableNative->set('SOL', ['price' => (float)0]);
+
 $tableJettons = new Table(config['TABLE_JETTONS_SIZE']);
 $tableJettons->column('name', Table::TYPE_STRING, 64);
 $tableJettons->column('symbol', Table::TYPE_STRING, 12);
@@ -18,8 +25,8 @@ $tableTokens->column('price', Table::TYPE_FLOAT);
 $tableTokens->column('active', Table::TYPE_INT, 1);
 $tableTokens->create();
 
-$prefdefinedJettons = new Table(config['TABLE_JETTONS_SIZE']);
-$prefdefinedJettons->create();
+$predefinedJettons = new Table(config['TABLE_JETTONS_SIZE']);
+$predefinedJettons->create();
 
-$prefdefinedTokens = new Table(config['TABLE_JETTONS_SIZE']);
-$prefdefinedTokens->create();
+$predefinedTokens = new Table(config['TABLE_JETTONS_SIZE']);
+$predefinedTokens->create();

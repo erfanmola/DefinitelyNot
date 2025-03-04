@@ -90,3 +90,5 @@ define('trade_condition_types_symbol', [
 	1 => 'SL',
 	2 => 'TP',
 ]);
+
+date_default_timezone_set('UTC');

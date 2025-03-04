@@ -12,7 +12,7 @@ if ($wallet_index > -1) {
 	switch ($wallet['type']) {
 		case 'TON':
 			foreach ($tableJettons as $jetton) {
-				if ($jetton['active'] && $jetton['symbol'] && $prefdefinedJettons->exists($jetton['address'])) {
+				if ($jetton['active'] && $jetton['symbol'] && $predefinedJettons->exists($jetton['address'])) {
 					$keyboard[] = [
 						'text' => $jetton['symbol'],
 						'callback_data' => joinPipe('ex', 'sl', $wallet['id'], $jetton['address']),
@@ -22,7 +22,7 @@ if ($wallet_index > -1) {
 			break;
 		case 'SOL':
 			foreach ($tableTokens as $token) {
-				if ($token['active'] && $token['symbol'] && $prefdefinedTokens->exists($token['address'])) {
+				if ($token['active'] && $token['symbol'] && $predefinedTokens->exists($token['address'])) {
 					$keyboard[] = [
 						'text' => $token['symbol'],
 						'callback_data' => joinPipe('ex', 'sl', $wallet['id'], $token['address']),

@@ -6,6 +6,7 @@ OpenSwoole\Coroutine::set(['hook_flags' => SWOOLE_HOOK_ALL]);
 use OpenSwoole\WebSocket\Server;
 use OpenSwoole\Http\Request;
 use OpenSwoole\Http\Response;
+use OpenSwoole\Timer;
 
 require_once __DIR__ . "/autoload.php";
 
@@ -21,9 +22,13 @@ $server->on("start", function (Server $server) use (&$cacheTableBalance) {
 	ReportToAdmin("<b>Server has started/reloaded</b>");
 
 	$cacheTableBalance->initCleanpTimer();
+
+	$scheduler = Timer::tick(60_000, function () {
+		require __DIR__ . "/events/schedule.php";
+	});
 });
 
-$server->on("request", function (Request $SwooleRequest, Response $SwooleResponse) use (&$server, &$cacheTableBalance, &$cacheTableAssetsBalance, &$tableJettons, &$tableTokens, &$tableConditions, &$tableAlerts, &$prefdefinedJettons, &$prefdefinedTokens) {
+$server->on("request", function (Request $SwooleRequest, Response $SwooleResponse) use (&$server, &$cacheTableBalance, &$cacheTableAssetsBalance, &$tableNative, &$tableJettons, &$tableTokens, &$tableConditions, &$tableAlerts, &$predefinedJettons, &$predefinedTokens) {
 	$SwooleResponse->end();
 
 	$result = $SwooleRequest->getContent();
@@ -51,7 +56,7 @@ $server->on("request", function (Request $SwooleRequest, Response $SwooleRespons
 	}
 });
 
-$server->on("message", function (Server $ws, $frame) use (&$tableJettons, &$tableTokens, &$tableConditions, &$tableAlerts, &$prefdefinedJettons, &$prefdefinedTokens) {
+$server->on("message", function (Server $ws, $frame) use (&$tableNative, &$tableJettons, &$tableTokens, &$tableConditions, &$tableAlerts, &$predefinedJettons, &$predefinedTokens) {
 	$result = json_decode($frame->data, true);
 	if (!$result && isset($result['type'])) return;
 

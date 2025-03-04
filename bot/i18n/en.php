@@ -6,6 +6,7 @@ defined('i18n_en') or define('i18n_en', [
 			'text' => joinDoubleLine(
 				"Welcome to <b>%bot_title%</b> 🙅‍♂️",
 				"I'm Definitely Not the best bot you can get with almost zero experience with blockchain.",
+				"%prices%",
 				"👛 Here are your wallets:",
 				"%wallets%",
 				"💡 For more info on your wallet and to retrieve your private key, tap the wallets button.",
@@ -22,6 +23,7 @@ defined('i18n_en') or define('i18n_en', [
 				'copy'       => '👁‍🗨 Copy Trade',
 				'trade'      => '💸 Trade Conditions',
 				'languages'  => 'Language',
+				'rates'      => '📊 Track Rates',
 			],
 		],
 		'trade_custom' => [

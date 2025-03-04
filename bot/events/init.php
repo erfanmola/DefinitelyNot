@@ -4,13 +4,13 @@ $mysqli = ConnectionPoolManager::getMySQLiConnection();
 
 // Initialize jettons table with predefined jettons that we support
 foreach ($result['jettons'] as $jetton) {
-	$prefdefinedJettons->set($jetton['address'], []);
+	$predefinedJettons->set($jetton['address'], []);
 	tableUpdate($tableJettons, $jetton['address'], $jetton);
 }
 
 // Initialize tokens table with predefined tokens that we support
 foreach ($result['tokens'] as $token) {
-	$prefdefinedTokens->set($token['address'], []);
+	$predefinedTokens->set($token['address'], []);
 	tableUpdate($tableTokens, $token['address'], $token);
 }
 
@@ -20,7 +20,7 @@ $untracked_assets = [];
 foreach (DPXDBQuery('trade_conditions', single_result: false, conn: $mysqli) as $condition) {
 	switch ($condition['blockchain']) {
 		case 'TON':
-			if (!$prefdefinedJettons->exists($condition['asset'])) {
+			if (!$predefinedJettons->exists($condition['asset'])) {
 				$untracked_assets[] = [
 					'type'    => $condition['blockchain'],
 					'address' => $condition['asset'],
@@ -28,7 +28,7 @@ foreach (DPXDBQuery('trade_conditions', single_result: false, conn: $mysqli) as 
 			}
 			break;
 		case 'SOL':
-			if (!$prefdefinedTokens->exists($condition['asset'])) {
+			if (!$predefinedTokens->exists($condition['asset'])) {
 				$untracked_assets[] = [
 					'type'    => $condition['blockchain'],
 					'address' => $condition['asset'],
