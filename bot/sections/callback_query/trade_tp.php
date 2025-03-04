@@ -15,7 +15,7 @@ if ($wallet_index > -1) {
 				if ($jetton['active'] && $jetton['symbol']) {
 					$keyboard[] = [
 						'text' => $jetton['symbol'],
-						'callback_data' => joinPipe('ex', 'lim', $wallet['id'], $jetton['address']),
+						'callback_data' => joinPipe('ex', 'tp', $wallet['id'], $jetton['address']),
 					];
 				}
 			}
@@ -25,7 +25,7 @@ if ($wallet_index > -1) {
 				if ($token['active'] && $token['symbol']) {
 					$keyboard[] = [
 						'text' => $token['symbol'],
-						'callback_data' => joinPipe('ex', 'lim', $wallet['id'], $token['address']),
+						'callback_data' => joinPipe('ex', 'tp', $wallet['id'], $token['address']),
 					];
 				}
 			}
@@ -33,7 +33,7 @@ if ($wallet_index > -1) {
 	}
 
 	EditMessageText($callback_chat_id, $callback_msg_id, td(
-		t('callback_query.trade_limit.text', $user['locale']),
+		t('callback_query.trade_tp.text', $user['locale']),
 		[
 			'type'   => $wallet['type'],
 			'wallet' => generateWalletsListText([$wallet], $user['locale']),
@@ -45,7 +45,7 @@ if ($wallet_index > -1) {
 				[
 					[
 						'text' => t('callback_query.trade_custom.buttons.custom', $user['locale']),
-						'callback_data' => joinPipe('ex', 'addr', $wallet['id'], 'lim'),
+						'callback_data' => joinPipe('ex', 'addr', $wallet['id'], 'tp'),
 					],
 				],
 				[
@@ -58,7 +58,7 @@ if ($wallet_index > -1) {
 		],
 	]);
 
-	$answer = t('callback_query.trade_limit.answer', $user['locale']);
+	$answer = t('callback_query.trade_tp.answer', $user['locale']);
 
 	syncWalletsBalanceDeferred([$wallet]);
 }

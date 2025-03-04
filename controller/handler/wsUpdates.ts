@@ -32,7 +32,7 @@ export const wsUpdateHandler = async () => {
 						stonfi: assetsData.jettons.stonfi,
 					},
 					tokens: {
-						meteora: null,
+						meteora: [],
 					},
 				},
 			});
@@ -47,7 +47,7 @@ export const wsUpdateHandler = async () => {
 						stonfi: filterUpdatedObjectsInArray(assetsData.jettons.stonfi),
 					},
 					tokens: {
-						meteora: null,
+						meteora: [],
 					},
 				},
 			};

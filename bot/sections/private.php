@@ -1,6 +1,6 @@
 <?php
 
-$flooding = IsUserFlooding($from_id, 8, 60);
+$flooding = IsUserFlooding($from_id, 16, 60);
 
 if ($flooding === false) {
 	require __DIR__ . "/../pipelines/define_user_params.php";

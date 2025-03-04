@@ -75,14 +75,35 @@ if ($flooding === false) {
 				// Trade Operations
 				if (str_starts_with($callback_data, joinPipe('ex', 'info', ''))) {
 					require __DIR__ . "/callback_query/trade_info.php";
-				} else if (preg_match("/^ex\|lim\|\d+\|.*$/", $callback_data)) {
+				} else if (str_starts_with($callback_data, joinPipe('ex', 'addr', ''))) {
+					require __DIR__ . "/callback_query/trade_custom.php";
+				}
+
+				// Trade Limit
+				if (preg_match("/^ex\|lim\|\d+\|.*$/", $callback_data)) {
 					require __DIR__ . "/callback_query/condition_limit.php";
 				} else if (str_starts_with($callback_data, joinPipe('ex', 'lim', ''))) {
 					require __DIR__ . "/callback_query/trade_limit.php";
 				} else if (str_starts_with($callback_data, joinPipe('ex', 'plim', ''))) {
 					require __DIR__ . "/callback_query/process_limit.php";
-				} else if (str_starts_with($callback_data, joinPipe('ex', 'addr', ''))) {
-					require __DIR__ . "/callback_query/trade_custom.php";
+				}
+
+				// Trade TP
+				if (preg_match("/^ex\|tp\|\d+\|.*$/", $callback_data)) {
+					require __DIR__ . "/callback_query/condition_tp.php";
+				} else if (str_starts_with($callback_data, joinPipe('ex', 'tp', ''))) {
+					require __DIR__ . "/callback_query/trade_tp.php";
+				} else if (str_starts_with($callback_data, joinPipe('ex', 'ptp', ''))) {
+					require __DIR__ . "/callback_query/process_tp.php";
+				}
+
+				// Trade SL
+				if (preg_match("/^ex\|sl\|\d+\|.*$/", $callback_data)) {
+					require __DIR__ . "/callback_query/condition_sl.php";
+				} else if (str_starts_with($callback_data, joinPipe('ex', 'sl', ''))) {
+					require __DIR__ . "/callback_query/trade_sl.php";
+				} else if (str_starts_with($callback_data, joinPipe('ex', 'psl', ''))) {
+					require __DIR__ . "/callback_query/process_sl.php";
 				}
 
 				// Language Operations

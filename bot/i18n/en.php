@@ -165,6 +165,56 @@ defined('i18n_en') or define('i18n_en', [
 				],
 			],
 		],
+		'trade_tp' => [
+			'answer' => '💰 Take Profit 💰',
+			'text'   => joinDoubleLine(
+				"🎯 Please choose the target asset you would like to sell and receive <b>%type%</b>. If your target asset is not listed below, you can choose custom address address.",
+				"%wallet%",
+			),
+			'condition' => [
+				'text' => joinDoubleLine(
+					"<b>💰 Take Profit</b>",
+					joinLine(
+						"🪙 %name% (<b>%symbol%</b>) (<b>%price%</b>)",
+						"<code>%address%</code>"
+					),
+					"%wallet%",
+				),
+				'price' => 'Please enter the price target for selling <b>%symbol%</b> in <b>USD</b> and receiving <b>%type%</b> (eg: <code>%price%</code>):',
+				'amount' => 'Please enter the amount of <b>%symbol%</b> to sell when it reaches <b>%price%</b>:',
+				'success' => '✅ Your Take Profit for selling <b>%amount% %symbol%</b> when <b>%symbol%</b> reaches <b>%price%</b> has been placed successfully. You can use /start to continue.',
+				'errors' => [
+					'price_invalid'  => 'The price you entered is not a valid numeric price. Please enter a valid price. You can use /start to cancel.',
+					'price_lower'    => 'The price you entered is already lower than the current <b>%price%</b>, you can set Stop Loss for it. Please enter a valid price. You can use /start to cancel.',
+					'amount_invalid' => 'The amount you entered is not a valid numeric amount. Please enter a valid amount. You can use /start to cancel.',
+				],
+			],
+		],
+		'trade_sl' => [
+			'answer' => '🛑 Stop Loss 🛑',
+			'text'   => joinDoubleLine(
+				"🎯 Please choose the target asset you would like to sell and receive <b>%type%</b>. If your target asset is not listed below, you can choose custom address address.",
+				"%wallet%",
+			),
+			'condition' => [
+				'text' => joinDoubleLine(
+					"<b>🛑 Stop Loss</b>",
+					joinLine(
+						"🪙 %name% (<b>%symbol%</b>) (<b>%price%</b>)",
+						"<code>%address%</code>"
+					),
+					"%wallet%",
+				),
+				'price' => 'Please enter the price target for selling <b>%symbol%</b> in <b>USD</b> and receiving <b>%type%</b> (eg: <code>%price%</code>):',
+				'amount' => 'Please enter the amount of <b>%symbol%</b> to sell when it drops to <b>%price%</b>:',
+				'success' => '✅ Your Stop Loss for selling <b>%amount% %symbol%</b> when <b>%symbol%</b> drops to <b>%price%</b> has been placed successfully. You can use /start to continue.',
+				'errors' => [
+					'price_invalid'  => 'The price you entered is not a valid numeric price. Please enter a valid price. You can use /start to cancel.',
+					'price_higher'   => 'The price you entered is already higher than the current <b>%price%</b>, you can set Take Profit for it. Please enter a valid price. You can use /start to cancel.',
+					'amount_invalid' => 'The amount you entered is not a valid numeric amount. Please enter a valid amount. You can use /start to cancel.',
+				],
+			],
+		],
 		'condition_info' => [
 			'answer' => '🗒 Condition Info 🗒',
 			'text' => joinDoubleLine(

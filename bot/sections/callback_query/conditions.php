@@ -9,7 +9,7 @@ EditMessageText($callback_chat_id, $callback_msg_id, td(t('callback_query.condit
 ]), null, [
 	'reply_markup' => [
 		'inline_keyboard' => [
-			...array_map(fn($conditions) => [
+			...array_map(fn($condition) => [
 				[
 					'text' => joinSpace(
 						blockchain_emoji[$condition['wallet']['type']],
@@ -17,7 +17,8 @@ EditMessageText($callback_chat_id, $callback_msg_id, td(t('callback_query.condit
 						'|',
 						number_format($condition['amount']),
 						$condition['asset']['symbol'] ?? truncateWalletAddress($condition['asset_address'], 3, 3),
-						joinEmpty("(", priceFormat($condition['price']), ")"),
+						'|',
+						priceFormat($condition['price']),
 					),
 					'callback_data' => joinPipe('condition', 'info', $condition['id']),
 				],

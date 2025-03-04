@@ -83,7 +83,7 @@ export const controllerWalletAssets = async (
 			return Response.json({
 				status: "success",
 				result: {
-					// TODO: implement
+					// TODO: Implement SOL
 					assets: [],
 				},
 			});

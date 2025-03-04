@@ -6,9 +6,7 @@ import type {
 } from "../types";
 import { assetsData, trackingContracts } from "../store";
 
-import { isMainNet } from "../utils/env";
 import { sleep } from "bun";
-import { tonJettons } from "../utils/jettons";
 
 export const controllerAssetsTrack = async (
 	params: ControllerAssetsTrackParams,
@@ -49,7 +47,7 @@ export const controllerAssetsTrack = async (
 											break;
 										}
 										case "SOL": {
-											// TODO: implement
+											// TODO: Implement SOL
 											break;
 										}
 									}

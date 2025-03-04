@@ -15,6 +15,12 @@ if ($asset && $asset['symbol'] && $asset['price']) {
 			case 'limit':
 				require __DIR__ . "/trade_process_limit.php";
 				break;
+			case 'tp':
+				require __DIR__ . "/trade_process_tp.php";
+				break;
+			case 'sl':
+				require __DIR__ . "/trade_process_sl.php";
+				break;
 		}
 	}
 }

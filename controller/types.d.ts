@@ -74,7 +74,7 @@ export type StonfiContractData = {
 
 export type AssetsData = {
 	jettons: { stonfi: StonfiContractData[] };
-	tokens: { meteora: null };
+	tokens: { meteora: [] };
 };
 
 export type WSMessageInit = {

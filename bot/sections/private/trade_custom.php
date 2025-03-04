@@ -74,12 +74,16 @@ if ($valid_address) {
 			},
 		]);
 
+		$redis->set(joinUnderline($from_id, 'recent', 'msg', 'id'), $sent_msg_id);
+
 		if ($asset) {
 			if ($asset['active'] && $asset['price']) {
 
 				EditMessageText($from_id, $sent_msg_id, td(
 					t(match ($sdata['type']) {
 						'lim' => 'callback_query.trade_limit.condition.text',
+						'tp'  => 'callback_query.trade_tp.condition.text',
+						'sl'  => 'callback_query.trade_sl.condition.text',
 					}, $user['locale']),
 					[
 						...$asset,
