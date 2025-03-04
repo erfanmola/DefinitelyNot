@@ -26,6 +26,6 @@ export const assetsData: AssetsData = {
 		stonfi: [],
 	},
 	tokens: {
-		meteora: [],
+		raydium: [],
 	},
 };

@@ -102,9 +102,14 @@ export type StonfiContractData = {
 	balance?: string;
 };
 
+export type RaydiumTokenData = Token & {
+	price: number;
+	updated?: boolean;
+};
+
 export type AssetsData = {
 	jettons: { stonfi: StonfiContractData[] };
-	tokens: { meteora: [] };
+	tokens: { raydium: RaydiumTokenData[] };
 };
 
 export type WSMessageInit = {

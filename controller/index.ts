@@ -11,6 +11,7 @@ import {
 import env from "./utils/env";
 import { pipeline } from "./utils/pipeline";
 import { pipelinePregenerateWallets } from "./pipelines/pregenerateWallets";
+import { pipelineSOLUpdateHandler } from "./pipelines/solUpdateHandler";
 import { pipelineStonfiUpdateHandler } from "./pipelines/stonfiUpdateHandler";
 import { pipelineTONUpdateHandler } from "./pipelines/tonUpdateHandler";
 import { pipelineWSUpdateHandler } from "./pipelines/wsUpdateHandler";
@@ -48,6 +49,7 @@ const server = Bun.serve({
 
 pipeline([
 	pipelineTONUpdateHandler,
+	pipelineSOLUpdateHandler,
 	pipelineWSUpdateHandler,
 	pipelineStonfiUpdateHandler,
 	pipelinePregenerateWallets,
