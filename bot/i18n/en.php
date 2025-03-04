@@ -154,6 +154,7 @@ defined('i18n_en') or define('i18n_en', [
 						"<code>%address%</code>"
 					),
 					"%wallet%",
+					"💸 You have <b>%balance% %symbol%</b>",
 				),
 				'price' => 'Please enter the price target for buying <b>%symbol%</b> by <b>%type%</b> in <b>USD</b> (eg: <code>%price%</code>):',
 				'amount' => 'Please enter the amount of <b>%symbol%</b> to buy when it reaches <b>%price%</b>:',
@@ -179,6 +180,7 @@ defined('i18n_en') or define('i18n_en', [
 						"<code>%address%</code>"
 					),
 					"%wallet%",
+					"💸 You have <b>%balance% %symbol%</b>",
 				),
 				'price' => 'Please enter the price target for selling <b>%symbol%</b> in <b>USD</b> and receiving <b>%type%</b> (eg: <code>%price%</code>):',
 				'amount' => 'Please enter the amount of <b>%symbol%</b> to sell when it reaches <b>%price%</b>:',
@@ -204,6 +206,7 @@ defined('i18n_en') or define('i18n_en', [
 						"<code>%address%</code>"
 					),
 					"%wallet%",
+					"💸 You have <b>%balance% %symbol%</b>",
 				),
 				'price' => 'Please enter the price target for selling <b>%symbol%</b> in <b>USD</b> and receiving <b>%type%</b> (eg: <code>%price%</code>):',
 				'amount' => 'Please enter the amount of <b>%symbol%</b> to sell when it drops to <b>%price%</b>:',

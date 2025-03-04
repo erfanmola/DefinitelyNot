@@ -89,6 +89,7 @@ if ($valid_address) {
 						...$asset,
 						'price' => priceFormat($asset['price']),
 						'wallet' => generateWalletsListText([$wallet], $user['locale']),
+						'balance' => number_format(getWalletAssetBalance($wallet['type'], $wallet['address'], $asset['address'])),
 					]
 				), null, [
 					'reply_markup' => [
@@ -108,11 +109,14 @@ if ($valid_address) {
 					td(
 						t(match ($sdata['type']) {
 							'lim' => 'callback_query.trade_limit.condition.text',
+							'tp'  => 'callback_query.trade_tp.condition.text',
+							'sl'  => 'callback_query.trade_sl.condition.text',
 						}, $user['locale']),
 						[
 							...$asset,
 							'price' => '???',
 							'wallet' => generateWalletsListText([$wallet], $user['locale']),
+							'balance' => number_format(getWalletAssetBalance($wallet['type'], $wallet['address'], $asset['address'])),
 						]
 					),
 					t('private.trade_custom.inactive', $user['locale']),

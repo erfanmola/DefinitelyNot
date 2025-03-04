@@ -23,7 +23,7 @@ $server->on("start", function (Server $server) use (&$cacheTableBalance) {
 	$cacheTableBalance->initCleanpTimer();
 });
 
-$server->on("request", function (Request $SwooleRequest, Response $SwooleResponse) use (&$server, &$cacheTableBalance, &$tableJettons, &$tableTokens) {
+$server->on("request", function (Request $SwooleRequest, Response $SwooleResponse) use (&$server, &$cacheTableBalance, &$cacheTableAssetsBalance, &$tableJettons, &$tableTokens) {
 	$SwooleResponse->end();
 
 	$result = $SwooleRequest->getContent();

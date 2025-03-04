@@ -42,7 +42,7 @@ function getWalletBalance(string $type, string $address, mixed &$conn): float
 {
 	global $cacheTableBalance;
 
-	return $cacheTableBalance->get(joinPipe($type, $address), function () use (&$type, &$address, &$conn) {
+	return $cacheTableBalance->get(joinPipe($type, substr($address, 0, 12)), function () use (&$type, &$address, &$conn) {
 		$type = strtoupper($type);
 		$result = requestController('/wallet/balance', [
 			'type'    => $type,
@@ -126,4 +126,22 @@ function deleteWallet(string $type, string $address, mixed &$conn): void
 		'type' => $type,
 		'address' => $address,
 	], conn: $conn);
+}
+
+function getWalletAssetBalance(string $type, string $address, string $asset): float
+{
+	global $cacheTableAssetsBalance;
+
+	return $cacheTableAssetsBalance->get(joinPipe($type, substr($address, 0, 12), substr($asset, 0, 12)), function () use (&$type, &$address, &$asset) {
+		$type = strtoupper($type);
+		$result = requestController('/wallet/assets', [
+			'type'    => $type,
+			'address' => $address,
+			'assets'  => [
+				$asset,
+			]
+		]);
+
+		return $result['assets'][$asset] ?? 0;
+	}, config['CACHE_TABLE_ASSETS_BALANCE_TIME']);
 }
