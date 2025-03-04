@@ -68,7 +68,7 @@ function generateWalletsListText(array $wallets, string $locale)
 				blockchain_emoji[$wallet['type']],
 				joinEmpty(
 					t('general.balance', $locale),
-					": <b>{$wallet['balance']} {$wallet['type']}</b>",
+					": <b>" . ((float)$wallet['balance'] ? rtrim((number_format($wallet['balance'], 9))) : 0) . " {$wallet['type']}</b>",
 				),
 			),
 			"<code>{$wallet['address']}</code>",
