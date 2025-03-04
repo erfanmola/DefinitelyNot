@@ -1,4 +1,5 @@
 import type {
+	ControllerWalletAssetsParams,
 	ControllerWalletBalanceParams,
 	ControllerWalletCreateParams,
 	Wallet,
@@ -9,6 +10,7 @@ import { createTonWallet, getTonBalance } from "../utils/ton";
 import { pipeline } from "../utils/pipeline";
 import { pipelinePregenerateWallets } from "../pipelines/pregenerateWallets";
 import { pregeneratedWallets } from "../store";
+import { stonfiGetJettonsBalance } from "../utils/stonfi";
 
 export const controllerWalletCreate = async (
 	params: ControllerWalletCreateParams,
@@ -61,6 +63,28 @@ export const controllerWalletBalance = async (
 				status: "success",
 				result: {
 					balance: await getSolBalance(params.address),
+				},
+			});
+	}
+};
+
+export const controllerWalletAssets = async (
+	params: ControllerWalletAssetsParams,
+): Promise<Response> => {
+	switch (params.type) {
+		case "TON":
+			return Response.json({
+				status: "success",
+				result: {
+					assets: await stonfiGetJettonsBalance(params.address, params.assets),
+				},
+			});
+		case "SOL":
+			return Response.json({
+				status: "success",
+				result: {
+					// TODO: implement
+					assets: [],
 				},
 			});
 	}

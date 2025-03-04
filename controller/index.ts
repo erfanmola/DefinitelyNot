@@ -1,4 +1,5 @@
 import {
+	controllerWalletAssets,
 	controllerWalletBalance,
 	controllerWalletCreate,
 } from "./sections/controllerWallet";
@@ -27,6 +28,8 @@ const server = Bun.serve({
 				return await controllerWalletCreate(body);
 			case ["POST", "/wallet/balance"].join("|"):
 				return await controllerWalletBalance(body);
+			case ["POST", "/wallet/assets"].join("|"):
+				return await controllerWalletAssets(body);
 			case ["POST", "/assets/track"].join("|"):
 				return await controllerAssetsTrack(body);
 		}

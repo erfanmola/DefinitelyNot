@@ -13,8 +13,9 @@
 	},
 	"dependencies": {
 		"@dedust/sdk": "^0.8.7",
+		"@orbs-network/ton-access": "^2.3.3",
 		"@solana/web3.js": "^1.98.0",
-		"@ston-fi/sdk": "^2.2.2",
+		"@ston-fi/sdk": "^2.2.3",
 		"@ton/core": "^0.60.1",
 		"@ton/crypto": "^3.3.0",
 		"@ton/ton": "^15.2.1",

@@ -1,6 +1,14 @@
+import type { TonClient } from "@ton/ton";
 import type { number } from "zod";
 
 export type WalletType = "SOL" | "TON";
+
+export type TonEndpointProviders = "toncenter" | "orbs";
+
+export type TonClientProvider = {
+	provider: TonEndpointProviders;
+	client: TonClient;
+};
 
 export type Wallet = {
 	type: WalletType;
@@ -35,6 +43,12 @@ export type ControllerWalletBalanceParams = {
 	address: string;
 };
 
+export type ControllerWalletAssetsParams = {
+	type: WalletType;
+	address: string;
+	assets: string[];
+};
+
 export type ControllerAssetsTrackParams = {
 	assets: {
 		type: WalletType;
@@ -55,6 +69,7 @@ export type StonfiContractData = {
 	dex_usd_price?: string;
 	dex_price_usd?: string;
 	updated?: boolean;
+	balance?: string;
 };
 
 export type AssetsData = {
