@@ -56,6 +56,36 @@ export type ControllerAssetsTrackParams = {
 	}[];
 };
 
+export type ControllerAssetSwapTON = {
+	type: "TON";
+	swap: {
+		offerAddress: string | "TON";
+		askAddress: string | "TON";
+		offerUnits: number;
+		walletCredentials: {
+			address: string;
+			secret: string;
+		};
+	};
+};
+
+export type ControllerAssetSwapSOL = {
+	type: "SOL";
+	swap: {
+		offerAddress: string | "SOL";
+		askAddress: string | "SOL";
+		offerUnits: number;
+		walletCredentials: {
+			address: string;
+			secret: string;
+		};
+	};
+};
+
+export type ControllerAssetSwapParams =
+	| ControllerAssetSwapTON
+	| ControllerAssetSwapSOL;
+
 export type StonfiContractData = {
 	contract_address: string;
 	symbol: string;

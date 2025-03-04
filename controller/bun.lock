@@ -7,6 +7,7 @@
         "@dedust/sdk": "^0.8.7",
         "@orbs-network/ton-access": "^2.3.3",
         "@solana/web3.js": "^1.98.0",
+        "@ston-fi/api": "^0.20.0",
         "@ston-fi/sdk": "^2.2.3",
         "@ton/core": "^0.60.1",
         "@ton/crypto": "^3.3.0",
@@ -17,6 +18,7 @@
         "dotenv": "^16.4.7",
         "ed25519-hd-key": "^1.3.0",
         "graphql": "^16.10.0",
+        "tweetnacl": "^1.0.3",
         "zod": "^3.24.2",
       },
       "devDependencies": {
@@ -42,7 +44,7 @@
 
     "@solana/web3.js": ["@solana/web3.js@1.98.0", "", { "dependencies": { "@babel/runtime": "^7.25.0", "@noble/curves": "^1.4.2", "@noble/hashes": "^1.4.0", "@solana/buffer-layout": "^4.0.1", "agentkeepalive": "^4.5.0", "bigint-buffer": "^1.1.5", "bn.js": "^5.2.1", "borsh": "^0.7.0", "bs58": "^4.0.1", "buffer": "6.0.3", "fast-stable-stringify": "^1.0.0", "jayson": "^4.1.1", "node-fetch": "^2.7.0", "rpc-websockets": "^9.0.2", "superstruct": "^2.0.2" } }, "sha512-nz3Q5OeyGFpFCR+erX2f6JPt3sKhzhYcSycBCSPkWjzSVDh/Rr1FqTVMRe58FKO16/ivTUcuJjeS5MyBvpkbzA=="],
 
-    "@ston-fi/api": ["@ston-fi/api@0.19.0", "", { "dependencies": { "camelcase-keys": "9.1.3", "decamelize-keys": "2.0.1", "ofetch": "1.4.1" } }, "sha512-EhjusFrlNDy8ajYzZd5RvpcNWmvf1dwPMyn8mJf0DfbaNv/64LKefX582s5OIjqDEwi8Y4ZkwTGpG8QN9gF1Zw=="],
+    "@ston-fi/api": ["@ston-fi/api@0.20.0", "", { "dependencies": { "camelcase-keys": "9.1.3", "decamelize-keys": "2.0.1", "ofetch": "1.4.1" } }, "sha512-aJR1DU0eZTieaSW/e7cHNgpDBFShs+DvRwd5/64SonlJTCxXb9A+PJyHLeErlpi83lA2/8iLTwHU1UqFEiyhaQ=="],
 
     "@ston-fi/sdk": ["@ston-fi/sdk@2.2.3", "", { "peerDependencies": { "@ston-fi/api": "^0", "@ton/ton": "^13.9.0 || ^14.0.0 || ^15.0.0" } }, "sha512-KPoIGzBoQS7jMzT0pVb9Iqz8uX8Hm7uyp2RkP5mcinlw+qmdogn32nU34w6RP1p2aL4ajBuKK5Z8Lx7IHa9LEg=="],
 

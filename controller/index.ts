@@ -1,10 +1,13 @@
 import {
+	controllerAssetSwap,
+	controllerAssetsTrack,
+} from "./sections/controllerAsset";
+import {
 	controllerWalletAssets,
 	controllerWalletBalance,
 	controllerWalletCreate,
 } from "./sections/controllerWallet";
 
-import { controllerAssetsTrack } from "./sections/controllerAsset";
 import env from "./utils/env";
 import { pipeline } from "./utils/pipeline";
 import { pipelinePregenerateWallets } from "./pipelines/pregenerateWallets";
@@ -32,6 +35,8 @@ const server = Bun.serve({
 				return await controllerWalletAssets(body);
 			case ["POST", "/assets/track"].join("|"):
 				return await controllerAssetsTrack(body);
+			case ["POST", "/assets/swap"].join("|"):
+				return await controllerAssetSwap(body);
 		}
 
 		return Response.json({

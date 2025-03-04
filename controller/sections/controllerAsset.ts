@@ -1,5 +1,6 @@
 import type {
 	Asset,
+	ControllerAssetSwapParams,
 	ControllerAssetsTrackParams,
 	Jetton,
 	Token,
@@ -7,6 +8,7 @@ import type {
 import { assetsData, trackingContracts } from "../store";
 
 import { sleep } from "bun";
+import { swapTonJetton } from "../utils/ton";
 
 export const controllerAssetsTrack = async (
 	params: ControllerAssetsTrackParams,
@@ -92,4 +94,31 @@ export const controllerAssetsTrack = async (
 				),
 		},
 	});
+};
+
+export const controllerAssetSwap = async (
+	params: ControllerAssetSwapParams,
+): Promise<Response> => {
+	switch (params.type) {
+		case "TON":
+			return Response.json({
+				status: "success",
+				result: {
+					swap: await swapTonJetton(
+						params.swap.offerAddress,
+						params.swap.askAddress,
+						params.swap.offerUnits,
+						params.swap.walletCredentials,
+					),
+				},
+			});
+		case "SOL":
+			return Response.json({
+				status: "success",
+				result: {
+					// TODO: Implement SOL
+					swap: false,
+				},
+			});
+	}
 };
