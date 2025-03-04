@@ -23,7 +23,7 @@ $server->on("start", function (Server $server) use (&$cacheTableBalance) {
 	$cacheTableBalance->initCleanpTimer();
 });
 
-$server->on("request", function (Request $SwooleRequest, Response $SwooleResponse) use (&$server, &$cacheTableBalance, &$cacheTableAssetsBalance, &$tableJettons, &$tableTokens) {
+$server->on("request", function (Request $SwooleRequest, Response $SwooleResponse) use (&$server, &$cacheTableBalance, &$cacheTableAssetsBalance, &$tableJettons, &$tableTokens, &$tableConditions, &$tableAlerts, &$prefdefinedJettons, &$prefdefinedTokens) {
 	$SwooleResponse->end();
 
 	$result = $SwooleRequest->getContent();
@@ -51,7 +51,7 @@ $server->on("request", function (Request $SwooleRequest, Response $SwooleRespons
 	}
 });
 
-$server->on("message", function (Server $ws, $frame) use (&$tableJettons, &$tableTokens) {
+$server->on("message", function (Server $ws, $frame) use (&$tableJettons, &$tableTokens, &$tableConditions, &$tableAlerts, &$prefdefinedJettons, &$prefdefinedTokens) {
 	$result = json_decode($frame->data, true);
 	if (!$result && isset($result['type'])) return;
 

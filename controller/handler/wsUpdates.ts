@@ -4,6 +4,7 @@ import env, { isMainNet } from "../utils/env";
 import { filterUpdatedObjectsInArray, objectClone } from "../utils/object";
 
 import { sleep } from "bun";
+import { solTokens } from "../utils/tokens";
 import { tonJettons } from "../utils/jettons";
 
 let ws = new WebSocket(`ws://${env.BOT_HOST}:${env.BOT_PORT}`);
@@ -69,7 +70,7 @@ const wsInitDataHandler = async () => {
 		JSON.stringify({
 			type: "init",
 			jettons: tonJettons[isMainNet ? "mainnet" : "testnet"],
-			tokens: [],
+			tokens: solTokens[isMainNet ? "mainnet" : "testnet"],
 		} as WSMessageInit),
 	);
 };

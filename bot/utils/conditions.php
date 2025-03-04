@@ -28,12 +28,27 @@ function getTradeConditionsByStatus(int|string $user_id, int $status, mixed &$co
 
 function createTradeCondition(array $params, mixed &$conn)
 {
-	// TODO: push to the current active table
-	DPXDBInsert('trade_conditions', $params, $conn);
+	SyncDBInsert('trade_conditions', $params, $conn);
+
+	if ($conn->insert_id) {
+		global $tableConditions;
+
+		$tableConditions->set($conn->insert_id, [
+			'user_id'    => (int)$params['user_id'],
+			'wallet_id'  => (int)$params['wallet_id'],
+			'type'       => (int)$params['type'],
+			'price'      => (float)$params['price'],
+			'amount'     => (float)$params['amount'],
+			'blockchain' => (string)$params['blockchain'],
+			'asset'      => (string)$params['asset'],
+		]);
+	}
 }
 
 function deleteTradeCondition(int $condition_id, mixed &$conn)
 {
-	// TODO: remove from the current active table
 	DPXDBDelete('trade_conditions', ['id' => $condition_id], conn: $conn);
+
+	global $tableConditions;
+	$tableConditions->del($condition_id);
 }

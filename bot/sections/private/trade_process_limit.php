@@ -33,12 +33,13 @@ switch ($sdata['state']) {
 			if (count(getTradeConditionsByStatus($from_id, 0, $mysqli)) < config['TRADE_CONDITIONS_PENDING_MAX']) {
 
 				createTradeCondition([
-					'user_id'   => $from_id,
-					'wallet_id' => $sdata['wallet_id'],
-					'type'      => 0,
-					'price'     => $sdata['price'],
-					'amount'    => $sdata['amount'],
-					'asset'     => $sdata['asset_address'],
+					'user_id'    => $from_id,
+					'wallet_id'  => $sdata['wallet_id'],
+					'blockchain' => $sdata['blockchain'],
+					'type'       => 0,
+					'price'      => $sdata['price'],
+					'amount'     => $sdata['amount'],
+					'asset'      => $sdata['asset_address'],
 				], $mysqli);
 
 				SendMessage($from_id, td(t('callback_query.trade_limit.condition.success', $user['locale']), [

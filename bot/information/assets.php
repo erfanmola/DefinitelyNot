@@ -17,3 +17,9 @@ $tableTokens->column('address', Table::TYPE_STRING, 48);
 $tableTokens->column('price', Table::TYPE_FLOAT);
 $tableTokens->column('active', Table::TYPE_INT, 1);
 $tableTokens->create();
+
+$prefdefinedJettons = new Table(config['TABLE_JETTONS_SIZE']);
+$prefdefinedJettons->create();
+
+$prefdefinedTokens = new Table(config['TABLE_JETTONS_SIZE']);
+$prefdefinedTokens->create();

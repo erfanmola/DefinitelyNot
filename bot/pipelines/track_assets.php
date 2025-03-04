@@ -1,18 +1,15 @@
 <?php
 
-// TODO: fetch addresses that are not natively supported
-$assets = [];
-
-$assets = requestController('/assets/track', [
-	'assets' => $assets,
+$untracked_assets = requestController('/assets/track', [
+	'assets' => $untracked_assets,
 ]);
 
-if ($assets) {
-	foreach ($assets['jettons'] as $jetton) {
+if ($untracked_assets) {
+	foreach ($untracked_assets['jettons'] as $jetton) {
 		tableUpdate($tableJettons, $jetton['address'], $jetton);
 	}
 
-	foreach ($assets['tokens'] as $token) {
+	foreach ($untracked_assets['tokens'] as $token) {
 		tableUpdate($tableTokens, $token['address'], $token);
 	}
 }

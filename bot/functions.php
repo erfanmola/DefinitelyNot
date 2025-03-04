@@ -14,6 +14,8 @@ require_once __DIR__ . "/utils/table.php";
 
 require_once __DIR__ . "/information/balance.php";
 require_once __DIR__ . "/information/assets.php";
+require_once __DIR__ . "/information/alerts.php";
+require_once __DIR__ . "/information/conditions.php";
 
 function &assignReferenceIfNotNull(&$reference, &$fallback = null)
 {

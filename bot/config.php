@@ -13,5 +13,7 @@ defined('config') or define('config', [
 	'CACHE_TABLE_ASSETS_BALANCE_TIME' => 30, // Seconds
 	'TABLE_JETTONS_SIZE' => 128,
 	'TABLE_TOKENS_SIZE' => 128,
+	'TABLE_ALERTS_SIZE' => 1024, // value of 1_000_000 would be nice for production, ~91MB Memory per 1M Items
+	'TABLE_CONDITIONS_SIZE' => 1024, // value of 1_000_000 would be nice for production, ~107MB Memory per 1M Items
 	'TRADE_CONDITIONS_PENDING_MAX' => 10,
 ]);

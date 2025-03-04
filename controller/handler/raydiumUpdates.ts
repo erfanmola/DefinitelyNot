@@ -1,6 +1,6 @@
-import type { RaydiumTokenData, StonfiContractData } from "../types";
-import { assetsData, nativeAssetsRate, trackingContracts } from "../store";
+import { assetsData, nativeAssetsRate } from "../store";
 
+import type { RaydiumTokenData } from "../types";
 import { isMainNet } from "../utils/env";
 import { objectEquals } from "../utils/object";
 import { solTokens } from "../utils/tokens";
