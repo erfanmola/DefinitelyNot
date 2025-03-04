@@ -9,21 +9,28 @@ export default defineConfig({
 		// https://vitepress.dev/reference/default-theme-config
 		nav: [
 			{ text: "Home", link: "/" },
-			{ text: "Examples", link: "/markdown-examples" },
+			{ text: "Getting Started", link: "/overview/introduction" },
+			{
+				text: "Telegram Bot",
+				link: "https://t.me/ItsDefinitelyNotBot",
+			},
+			{ text: "GitHub", link: "https://github.com/erfanmola/DefinitelyNot" },
 		],
-
+		socialLinks: [
+			{ icon: "github", link: "https://github.com/erfanmola/DefinitelyNot" },
+		],
 		sidebar: [
 			{
-				text: "Examples",
+				text: "Overview",
 				items: [
-					{ text: "Markdown Examples", link: "/markdown-examples" },
-					{ text: "Runtime API Examples", link: "/api-examples" },
+					{ text: "Introduction", link: "/overview/introduction" },
+					{ text: "Features", link: "/overview/features" },
+					{ text: "Architecture", link: "/overview/architecture" },
+					{ text: "Wallet Management", link: "/overview/wallets" },
+					{ text: "Security & Config", link: "/overview/configuration" },
+					{ text: "TON APIs", link: "/overview/ton-apis" },
 				],
 			},
-		],
-
-		socialLinks: [
-			{ icon: "github", link: "https://github.com/vuejs/vitepress" },
 		],
 	},
 });
