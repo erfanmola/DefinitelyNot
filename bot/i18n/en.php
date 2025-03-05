@@ -34,6 +34,7 @@ defined('i18n_en') or define('i18n_en', [
 		],
 	],
 	'inline_query' => [
+		'price' => "The current price of <b>%symbol%</b> is <b>%price%</b>.",
 		'notfound' => [
 			'title' => 'Not Found',
 			'message' => "We can't find any result matching your query."

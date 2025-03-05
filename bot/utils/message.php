@@ -111,12 +111,12 @@ function generateNativePricesText(): string
 		$price = $tableNative->get($type, 'price');
 
 		if ($price) {
-			$string = match ($type) {
-				'TON' => '💎',
-				'SOL' => '🧬',
-			};
-			$string .= " <b>{$type}: " . priceFormat($price, 4) . "</b>";
-			$items[] = $string;
+			$items[] = joinEmpty(
+				native_asset_emoji[$type],
+				" <b>{$type}: ",
+				priceFormat($price, 4),
+				"</b>",
+			);
 		}
 	}
 

@@ -4,8 +4,8 @@
 if ((int)date('i') % 5 === 0) {
 	$channel_message_text  = joinDoubleLine(
 		generateNativePricesText(),
-		generateAssetPricesText('TON', '💙'),
-		generateAssetPricesText('SOL', '💜'),
+		generateAssetPricesText('TON', asset_emoji['TON']),
+		generateAssetPricesText('SOL', asset_emoji['SOL']),
 		joinSpace(date('M d, H:i'), 'UTC'),
 	);
 

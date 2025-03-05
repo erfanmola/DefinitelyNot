@@ -15,8 +15,8 @@ if (isset($result['message'])) {
 	$msg_id = $result['channel_post']['message_id'];
 
 	LeaveChat($chat_id);
-} else if ($callback) {
+} else if (isset($callback)) {
 	require __DIR__ . "/sections/callback_query.php";
-} else if ($inline_query) {
+} else if (isset($inline_query)) {
 	require __DIR__ . "/sections/inline_query.php";
 }

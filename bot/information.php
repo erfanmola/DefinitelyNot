@@ -30,6 +30,29 @@ define('blockchain_emoji', [
 	'SOL' => '🟣',
 ]);
 
+define('native_asset_emoji', [
+	'TON' => '💎',
+	'SOL' => '🧬',
+]);
+
+define('asset_emoji', [
+	'TON' => '💙',
+	'SOL' => '💜',
+]);
+
+define('trade_condition_types', [
+	0 => 'limit',
+	1 => 'sl',
+	2 => 'tp',
+]);
+
+define('trade_condition_types_symbol', [
+	0 => 'Limit',
+	1 => 'SL',
+	2 => 'TP',
+]);
+
+
 define('not_art', [
 	'art' => [
 		'⬛️⬛️⬛️⬛️⬛️⬛️⬛️⬛️⬛️',
@@ -77,18 +100,6 @@ define('not_art', [
 		'⬛️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬛️',
 		'⬛️⬛️⬛️⬛️⬛️⬛️⬛️⬛️⬛️',
 	]
-]);
-
-define('trade_condition_types', [
-	0 => 'limit',
-	1 => 'sl',
-	2 => 'tp',
-]);
-
-define('trade_condition_types_symbol', [
-	0 => 'Limit',
-	1 => 'SL',
-	2 => 'TP',
 ]);
 
 date_default_timezone_set('UTC');
