@@ -1,30 +1,39 @@
 <?php
 
-[, $blockchain, $asset_address, $type] = splitPipe($callback_data);
+[, $wallet_id, $asset_address, $type] = splitPipe($callback_data);
 
-$asset = match ($blockchain) {
-	'TON' => $tableJettons->get($asset_address),
-	'SOL' => $tableTokens->get($asset_address),
-};
+$wallet_index = array_search($wallet_id, array_column($user['wallets'], 'id'));
 
-if ($asset) {
-	EditMessageText($callback_chat_id, $callback_msg_id, td(
-		t('callback_query.swap.set.amount_' . $type, $user['locale']),
-		[
-			...$asset,
-			'price' => priceFormat($asset['price'] ?? '???'),
-		]
-	), null, [
-		'reply_markup' => [
-			'inline_keyboard' => [],
-		],
-	]);
+if ($wallet_index > -1) {
+	$wallet = $user['wallets'][$wallet_index];
+	$blockchain = $wallet['type'];
 
-	$answer = t('callback_query.swap.set.answer', $user['locale']);
+	$asset = match ($blockchain) {
+		'TON' => $tableJettons->get($asset_address),
+		'SOL' => $tableTokens->get($asset_address),
+	};
 
-	setState($callback_from_id, $redis, joinPipe('swap', 'amount'), [
-		'blockchain' => $blockchain,
-		'asset'      => $asset_address,
-		'type'       => $type,
-	]);
+	if ($asset) {
+		EditMessageText($callback_chat_id, $callback_msg_id, td(
+			t('callback_query.swap.set.amount_' . $type, $user['locale']),
+			[
+				...$asset,
+				'price' => priceFormat($asset['price'] ?? '???'),
+				'type'  => $blockchain,
+			]
+		), null, [
+			'reply_markup' => [
+				'inline_keyboard' => [],
+			],
+		]);
+
+		$answer = t('callback_query.swap.set.answer', $user['locale']);
+
+		setState($callback_from_id, $redis, joinPipe('swap', 'amount'), [
+			'wallet_id'  => $wallet_id,
+			'blockchain' => $blockchain,
+			'asset'      => $asset_address,
+			'type'       => $type,
+		]);
+	}
 }

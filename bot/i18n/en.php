@@ -85,6 +85,7 @@ defined('i18n_en') or define('i18n_en', [
 			'errors' => [
 				'max' => '🚫 You already have reached the limit of <b>%max%</b> number of active trade conditions, please delete some before you continue.',
 			],
+			'trigger' => "🗒 Your <b>%type%</b> for <b>%amount% %symbol%</b> on <b>%price%</b> is triggered and you will be notified of the result of order.",
 		],
 		'create' => [
 			'answer' => '🔗 Create Wallet 🔗',
@@ -182,8 +183,8 @@ defined('i18n_en') or define('i18n_en', [
 					"💸 You have <b>%balance% %symbol%</b>",
 				),
 				'price' => 'Please enter the price target for buying <b>%symbol%</b> by <b>%type%</b> in <b>USD</b> (eg: <code>%price%</code>):',
-				'amount' => 'Please enter the amount of <b>%symbol%</b> to buy when it reaches <b>%price%</b>:',
-				'success' => '✅ Your Limit Order for buying <b>%amount% %symbol%</b> when <b>%symbol%</b> reaches <b>%price%</b> has been placed successfully. You can use /start to continue.',
+				'amount' => 'Please enter the amount of <b>%type%</b> to swap for <b>%symbol%</b> when <b>%symbol%</b> reaches <b>%price%</b>:',
+				'success' => '✅ Your Limit Order for swapping <b>%amount% %type%</b> to <b>%symbol%</b> when it reaches <b>%price%</b> has been placed successfully. You can use /start to continue.',
 				'errors' => [
 					'price_invalid' => 'The price you entered is not a valid numeric price. Please enter a valid price. You can use /start to cancel.',
 					'price_higher'  => 'The price you entered is already higher than the current <b>%price%</b>, you can use instant trade. Please enter a valid price. You can use /start to cancel.',
@@ -308,8 +309,12 @@ defined('i18n_en') or define('i18n_en', [
 		'swap' => [
 			'answer' => '⚡️ Instant Swap ⚡️',
 			'create' => [
-				'answer' => '🔗 Choose Blockchain 🔗',
-				'text' => '🔗 What blockchain would you like to swap on?',
+				'answer' => '🔗 Choose Wallet 🔗',
+				'text' => joinDoubleLine(
+					"<b>⚡️ Instant Swap ⚡️</b>",
+					"%wallets%",
+					'💳 Please select a wallet to continue',
+				),
 			],
 			'choose' => [
 				'answer' => '🎯 Choose Target 🎯',
@@ -325,13 +330,17 @@ defined('i18n_en') or define('i18n_en', [
 			],
 			'set' => [
 				'answer' => '💲 Enter Amount 💲',
-				'amount_0' => 'Please enter the amount of <b>%symbol% (%price%)</b> you would like to buy:',
+				'amount_0' => 'Please enter the amount of <b>%type%</b> to swap for <b>%symbol% (%price%)</b>:',
 				'amount_1' => 'Please enter the amount of <b>%symbol% (%price%)</b> you would like to sell:',
-				'success_0' => '📥 Your Buy Order for <b>%amount% %symbol% (%price%)</b> has been placed successfully. You will be notified from the result of swap. You can use /start to continue.',
+				'success_0' => '📥 Your Buy Order for swapping <b>%amount% %type%</b> to <b>%symbol% (%price%)</b> has been placed successfully. You will be notified from the result of swap. You can use /start to continue.',
 				'success_1' => '📤 Your Sell Order for <b>%amount% %symbol% (%price%)</b> has been placed successfully. You will be notified from the result of swap. You can use /start to continue.',
 				'errors' => [
 					'amount_invalid'  => 'The amount you entered is not a valid numeric amount. Please enter a valid amount. You can use /start to cancel.',
 				],
+			],
+			'transaction' => [
+				'success' => '✅ Swap transaction from <b>%from%</b> to <b>%to%</b> succeeded.',
+				'failed' => '❌ Swap transaction from <b>%from%</b> to <b>%to%</b> failed.',
 			],
 		],
 		'general' => [

@@ -59,7 +59,7 @@ if ($trigger) {
 
 	$mysqli = ConnectionPoolManager::getMySQLiConnection();
 
-	DPXDBUpdate('alerts', [
+	SyncDBUpdate('alerts', [
 		'status' => 1,
 	], joinEmpty("`id` IN (", implode(",", $trigger), ")"), $mysqli);
 
@@ -93,7 +93,7 @@ if ($reactivate) {
 
 	$mysqli = ConnectionPoolManager::getMySQLiConnection();
 
-	DPXDBUpdate('alerts', [
+	SyncDBUpdate('alerts', [
 		'status' => 0,
 	], joinEmpty("`id` IN (", implode(",", $reactivate), ")"), $mysqli);
 

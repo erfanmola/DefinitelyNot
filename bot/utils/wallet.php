@@ -12,17 +12,17 @@ function getWallets(int|string $user_id, mixed &$conn): array | null
 	], single_result: false, conn: $conn);
 }
 
-function createWallet(int|string $user_id, string $type, mixed &$conn): array | null
+function createWallet(int|string $user_id, string $blockchain, mixed &$conn): array | null
 {
-	$type = strtoupper($type);
+	$blockchain = strtoupper($blockchain);
 	$result = requestController('/wallet/create', [
-		'type' => $type,
+		'type' => $blockchain,
 	]);
 
 	if (isset($result['wallet'])) {
-		DPXDBInsert('wallets', [
+		SyncDBInsert('wallets', [
 			'user_id'     => $user_id,
-			'type'        => $type,
+			'type'        => $blockchain,
 			'address'     => $result['wallet']['address'],
 			'public_key'  => $result['wallet']['publicKey'],
 			'secret_key'  => $result['wallet']['secretKey'],
@@ -38,14 +38,14 @@ function createWallet(int|string $user_id, string $type, mixed &$conn): array | 
 	return null;
 }
 
-function getWalletBalance(string $type, string $address, mixed &$conn): float
+function getWalletBalance(string $blockchain, string $address, mixed &$conn): float
 {
 	global $cacheTableBalance;
 
-	return $cacheTableBalance->get(joinPipe($type, substr($address, 0, 12)), function () use (&$type, &$address, &$conn) {
-		$type = strtoupper($type);
+	return $cacheTableBalance->get(joinPipe($blockchain, substr($address, 0, 12)), function () use (&$blockchain, &$address, &$conn) {
+		$blockchain = strtoupper($blockchain);
 		$result = requestController('/wallet/balance', [
-			'type'    => $type,
+			'type'    => $blockchain,
 			'address' => $address,
 		]);
 
@@ -54,7 +54,7 @@ function getWalletBalance(string $type, string $address, mixed &$conn): float
 		$oldBalance = (float)DPXDBQuery(
 			'wallets',
 			['balance'],
-			['address' => $address, 'type' => $type],
+			['address' => $address, 'type' => $blockchain],
 			casts: ['balance' => 'double'],
 			conn: $conn
 		)['balance'] ?? 0;
@@ -64,12 +64,12 @@ function getWalletBalance(string $type, string $address, mixed &$conn): float
 		}
 
 		if ($balance !== $oldBalance) {
-			DPXDBUpdate(
+			SyncDBUpdate(
 				'wallets',
 				[
 					'balance' => $balance,
 				],
-				['address' => $address, 'type' => $type],
+				['address' => $address, 'type' => $blockchain],
 				$conn
 			);
 		}
@@ -103,12 +103,12 @@ function syncWalletsBalanceDeferred(array $wallets)
 	});
 }
 
-function deleteWallet(string $type, string $address, mixed &$conn): void
+function deleteWallet(string $blockchain, string $address, mixed &$conn): void
 {
-	$type = strtoupper($type);
+	$blockchain = strtoupper($blockchain);
 
 	$wallet = DPXDBQuery('wallets', ['user_id', 'id'], [
-		'type' => $type,
+		'type' => $blockchain,
 		'address' => $address,
 	], conn: $conn);
 
@@ -123,19 +123,19 @@ function deleteWallet(string $type, string $address, mixed &$conn): void
 	}
 
 	DPXDBDelete('wallets', [
-		'type' => $type,
+		'type' => $blockchain,
 		'address' => $address,
 	], conn: $conn);
 }
 
-function getWalletAssetBalance(string $type, string $address, string $asset): float
+function getWalletAssetBalance(string $blockchain, string $address, string $asset): float
 {
 	global $cacheTableAssetsBalance;
 
-	return $cacheTableAssetsBalance->get(joinPipe($type, substr($address, 0, 12), substr($asset, 0, 12)), function () use (&$type, &$address, &$asset) {
-		$type = strtoupper($type);
+	return $cacheTableAssetsBalance->get(joinPipe($blockchain, substr($address, 0, 12), substr($asset, 0, 12)), function () use (&$blockchain, &$address, &$asset) {
+		$blockchain = strtoupper($blockchain);
 		$result = requestController('/wallet/assets', [
-			'type'    => $type,
+			'type'    => $blockchain,
 			'address' => $address,
 			'assets'  => [
 				$asset,
@@ -144,4 +144,53 @@ function getWalletAssetBalance(string $type, string $address, string $asset): fl
 
 		return $result['assets'][$asset] ?? 0;
 	}, config['CACHE_TABLE_ASSETS_BALANCE_TIME']);
+}
+
+function swapAsset(int|string $user_id, string $blockchain, string $address, string $secret, string $offer, float $offer_amount, string $ask)
+{
+	Coroutine::defer(function () use (&$user_id, &$blockchain, &$address, &$secret, &$offer, &$offer_amount, &$ask) {
+		$result = requestController('/assets/swap', [
+			'type' => $blockchain,
+			'swap' => [
+				'offerAddress' => $offer,
+				'askAddress'   => $ask,
+				'offerUnits'   => $offer_amount,
+				'walletCredentials' => [
+					'address' => $address,
+					'secret'  => $secret,
+				],
+			]
+		]);
+
+		global $tableJettons, $tableTokens;
+
+		$offer_symbol = match ($offer) {
+			'TON' => 'TON',
+			'SOL' => 'SOL',
+			default => match ($blockchain) {
+				'TON' => $tableJettons->get($offer, 'symbol') ?? null,
+				'SOL' => $tableTokens->get($offer, 'symbol') ?? null,
+			},
+		} ?? truncateWalletAddress($offer, 3, 3);
+
+		$ask_symbol = match ($ask) {
+			'TON' => 'TON',
+			'SOL' => 'SOL',
+			default => match ($blockchain) {
+				'TON' => $tableJettons->get($ask, 'symbol') ?? null,
+				'SOL' => $tableTokens->get($ask, 'symbol') ?? null,
+			},
+		} ?? truncateWalletAddress($ask, 3, 3);
+
+		$params = [
+			'from' => joinSpace($offer_amount, $offer_symbol),
+			'to' => $ask_symbol,
+		];
+
+		if ($result && isset($result['swap']) && $result['swap'] === true) {
+			SendMessage($user_id, td(t('callback_query.swap.transaction.success', 'en'), $params));
+		} else {
+			SendMessage($user_id, td(t('callback_query.swap.transaction.failed', 'en'), $params));
+		}
+	});
 }

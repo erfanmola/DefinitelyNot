@@ -16,6 +16,7 @@ switch ($sdata['state']) {
 				SendMessage($from_id, td(t('callback_query.trade_limit.condition.amount', $user['locale']), [
 					'symbol' => $asset['symbol'],
 					'price' => priceFormat($sdata['price']),
+					'type'  => $sdata['blockchain'],
 				]), $msg_id);
 			}
 		} else {
@@ -46,6 +47,7 @@ switch ($sdata['state']) {
 					'amount' => number_format($sdata['amount']),
 					'symbol' => $asset['symbol'],
 					'price'  => priceFormat($sdata['price']),
+					'type'  => $sdata['blockchain'],
 				]), $msg_id);
 			} else {
 

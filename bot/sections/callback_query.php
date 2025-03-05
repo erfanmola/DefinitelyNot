@@ -95,9 +95,9 @@ if ($flooding === false) {
 				}
 
 				// Swap Operations
-				if (preg_match("/^swap\|(TON|SOL)\|.*\|\d+$/", $callback_data)) {
+				if (preg_match("/^swap\|\d+\|.*\|\d+$/", $callback_data)) {
 					require __DIR__ . "/callback_query/swap_set.php";
-				} else if (preg_match("/^swap\|(TON|SOL)\|.*$/", $callback_data)) {
+				} else if (preg_match("/^swap\|\d+\|.*$/", $callback_data)) {
 					require __DIR__ . "/callback_query/swap_type.php";
 				} else if (str_starts_with($callback_data, joinPipe('swap', 'create', ''))) {
 					require __DIR__ . "/callback_query/swap_create.php";
