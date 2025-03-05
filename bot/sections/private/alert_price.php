@@ -5,10 +5,16 @@ require __DIR__ . "/../../pipelines/define_user_alerts.php";
 $sdata['price'] = (float)$text;
 
 if ($sdata['price']) {
-	$asset = match ($sdata['blockchain']) {
-		'TON' => $tableJettons->get($sdata['asset']),
-		'SOL' => $tableTokens->get($sdata['asset']),
-	};
+	if ($sdata['asset'] === '~') {
+		$asset = [
+			'symbol' => $sdata['blockchain'],
+		];
+	} else {
+		$asset = match ($sdata['blockchain']) {
+			'TON' => $tableJettons->get($sdata['asset']),
+			'SOL' => $tableTokens->get($sdata['asset']),
+		};
+	}
 
 	if ($asset) {
 		setState($from_id, $redis);

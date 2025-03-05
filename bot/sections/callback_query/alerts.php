@@ -15,7 +15,9 @@ EditMessageText($callback_chat_id, $callback_msg_id, td(t('callback_query.alerts
 						blockchain_emoji[$alert['blockchain']],
 						alert_types[$alert['type']],
 						'|',
-						$alert['asset']['symbol'] ?? truncateWalletAddress($alert['asset_address'], 3, 3),
+						($alert['asset_address'] === '~')
+							? ($alert['blockchain'])
+							: ($alert['asset']['symbol'] ?? truncateWalletAddress($alert['asset_address'], 3, 3)),
 						'|',
 						priceFormat($alert['price']),
 					),

@@ -35,6 +35,12 @@ EditMessageText(
 	[
 		'reply_markup' => [
 			'inline_keyboard' => [
+				[
+					[
+						'text' => $blockchain,
+						'callback_data' => joinPipe('alert', $blockchain, '~'),
+					],
+				],
 				...array_chunk($keyboard, 3),
 				[
 					[

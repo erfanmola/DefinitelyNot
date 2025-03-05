@@ -2,10 +2,17 @@
 
 [, $blockchain, $asset_address, $type] = splitPipe($callback_data);
 
-$asset = match ($blockchain) {
-	'TON' => $tableJettons->get($asset_address),
-	'SOL' => $tableTokens->get($asset_address),
-};
+if ($asset_address === '~') {
+	$asset = [
+		'symbol' => $blockchain,
+		'price'  => $tableNative->get($blockchain, 'price') ?? '0.0',
+	];
+} else {
+	$asset = match ($blockchain) {
+		'TON' => $tableJettons->get($asset_address),
+		'SOL' => $tableTokens->get($asset_address),
+	};
+}
 
 if ($asset) {
 	EditMessageText($callback_chat_id, $callback_msg_id, td(
