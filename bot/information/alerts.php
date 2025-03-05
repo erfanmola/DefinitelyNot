@@ -8,4 +8,5 @@ $tableAlerts->column('type', Table::TYPE_INT, 1);
 $tableAlerts->column('price', Table::TYPE_FLOAT);
 $tableAlerts->column('blockchain', Table::TYPE_STRING, 3);
 $tableAlerts->column('asset', Table::TYPE_STRING, 48);
+$tableAlerts->column('status', Table::TYPE_INT, 1);
 $tableAlerts->create();

@@ -16,6 +16,7 @@ foreach ($result['tokens'] as $token) {
 
 $untracked_assets = [];
 
+// TODO: only status 1 conditions
 // Initialize conditions table
 foreach (DPXDBQuery('trade_conditions', single_result: false, conn: $mysqli) as $condition) {
 	switch ($condition['blockchain']) {
@@ -75,6 +76,7 @@ foreach (DPXDBQuery('alerts', single_result: false, conn: $mysqli) as $alert) {
 		'price'      => (float)$alert['price'],
 		'blockchain' => (string)$alert['blockchain'],
 		'asset'      => (string)$alert['asset'],
+		'status'     => (int)$alert['status'],
 	]);
 }
 

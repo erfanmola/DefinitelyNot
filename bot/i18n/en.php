@@ -272,8 +272,8 @@ defined('i18n_en') or define('i18n_en', [
 			'set' => [
 				'answer' => '💲 Enter Price 💲',
 				'price' => 'Please enter the price threshold for <b>%symbol%</b> in <b>USD</b> (eg: <code>%price%</code>):',
-				'success_inc' => '📈 Your Alert for <b>%symbol%</b> price movement higher than <b>%price%</b> has been set successfully. You can use /start to continue.',
-				'success_dec' => '📉 Your Alert for <b>%symbol%</b> price movement lower than <b>%price%</b> has been set successfully. You can use /start to continue.',
+				'success_0' => '📉 Your Alert for <b>%symbol%</b> price movement lower than <b>%price%</b> has been set successfully. You can use /start to continue.',
+				'success_1' => '📈 Your Alert for <b>%symbol%</b> price movement higher than <b>%price%</b> has been set successfully. You can use /start to continue.',
 				'errors' => [
 					'price_invalid'  => 'The price you entered is not a valid numeric price. Please enter a valid price. You can use /start to cancel.',
 				],
@@ -299,6 +299,10 @@ defined('i18n_en') or define('i18n_en', [
 			],
 			'errors' => [
 				'max' => '🚫 You already have reached the limit of <b>%max%</b> number of active alerts, please delete some before you continue.',
+			],
+			'notify' => [
+				'0' => '📉 Price of <b>%symbol%</b> dropped below <b>%price%</b>.',
+				'1' => '📈 Price of <b>%symbol%</b> raise above <b>%price%</b>.',
 			],
 		],
 		'general' => [

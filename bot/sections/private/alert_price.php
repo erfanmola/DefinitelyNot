@@ -29,7 +29,7 @@ if ($sdata['price']) {
 				'asset'      => $sdata['asset'],
 			], $mysqli);
 
-			SendMessage($from_id, td(t('callback_query.alerts.set.success_' . strtolower(alert_types[$sdata['type']]), $user['locale']), [
+			SendMessage($from_id, td(t('callback_query.alerts.set.success_' . $sdata['type'], $user['locale']), [
 				'symbol' => $asset['symbol'],
 				'price' => priceFormat($sdata['price']),
 			]), $msg_id);

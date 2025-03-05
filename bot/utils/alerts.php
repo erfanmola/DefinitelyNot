@@ -35,6 +35,7 @@ function createAlert(array $params, mixed &$conn)
 			'price'      => (float)$params['price'],
 			'blockchain' => (string)$params['blockchain'],
 			'asset'      => (string)$params['asset'],
+			'status'     => 0,
 		]);
 	}
 }

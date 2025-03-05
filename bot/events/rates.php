@@ -34,5 +34,3 @@ $updated_assets = [
 	'TON' => array_column($result['assets']['jettons']['stonfi'], 'contract_address'),
 	'SOL' => array_column($result['assets']['tokens']['raydium'], 'address'),
 ];
-
-print_r($updated_assets);

@@ -73,4 +73,19 @@ const wsInitDataHandler = async () => {
 			tokens: solTokens[isMainNet ? "mainnet" : "testnet"],
 		} as WSMessageInit),
 	);
+	await sleep(1e4);
+	ws.send(
+		JSON.stringify({
+			type: "rates",
+			native: { ...nativeAssetsRate },
+			assets: {
+				jettons: {
+					stonfi: assetsData.jettons.stonfi,
+				},
+				tokens: {
+					raydium: assetsData.tokens.raydium,
+				},
+			},
+		} as WSMessageRates),
+	);
 };
