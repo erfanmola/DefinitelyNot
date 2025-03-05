@@ -305,6 +305,35 @@ defined('i18n_en') or define('i18n_en', [
 				'1' => '📈 Price of <b>%symbol%</b> raise above <b>%price%</b>.',
 			],
 		],
+		'swap' => [
+			'answer' => '⚡️ Instant Swap ⚡️',
+			'create' => [
+				'answer' => '🔗 Choose Blockchain 🔗',
+				'text' => '🔗 What blockchain would you like to swap on?',
+			],
+			'choose' => [
+				'answer' => '🎯 Choose Target 🎯',
+				'text'   => "🎯 Please choose the target asset you would like to swap. If your target asset is not listed below, you can choose custom address address.",
+			],
+			'type' => [
+				'answer' => '↔️ Choose Type ↔️',
+				'text' => '↔️ What type of swap for <b>%symbol% (%price%)</b> would you like to place?',
+				'buttons' => [
+					'buy' => '📥 Buy',
+					'sell' => '📤 Sell',
+				],
+			],
+			'set' => [
+				'answer' => '💲 Enter Amount 💲',
+				'amount_0' => 'Please enter the amount of <b>%symbol% (%price%)</b> you would like to buy:',
+				'amount_1' => 'Please enter the amount of <b>%symbol% (%price%)</b> you would like to sell:',
+				'success_0' => '📥 Your Buy Order for <b>%amount% %symbol% (%price%)</b> has been placed successfully. You will be notified from the result of swap. You can use /start to continue.',
+				'success_1' => '📤 Your Sell Order for <b>%amount% %symbol% (%price%)</b> has been placed successfully. You will be notified from the result of swap. You can use /start to continue.',
+				'errors' => [
+					'amount_invalid'  => 'The amount you entered is not a valid numeric amount. Please enter a valid amount. You can use /start to cancel.',
+				],
+			],
+		],
 		'general' => [
 			'buttons' => [
 				'price' => 'Enter Price',

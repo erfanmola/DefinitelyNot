@@ -29,6 +29,9 @@ if ($flooding === false) {
 			case 'create|alert':
 				require __DIR__ . "/callback_query/create_alert.php";
 				break;
+			case 'swap':
+				require __DIR__ . "/callback_query/create_swap.php";
+				break;
 			case 'copytrade':
 				require __DIR__ . "/callback_query/copytrade.php";
 				break;
@@ -89,6 +92,17 @@ if ($flooding === false) {
 					require __DIR__ . "/callback_query/alert_del.php";
 				} else if (str_starts_with($callback_data, joinPipe('alert', 'delete', ''))) {
 					require __DIR__ . "/callback_query/alert_delete.php";
+				}
+
+				// Swap Operations
+				if (preg_match("/^swap\|(TON|SOL)\|.*\|\d+$/", $callback_data)) {
+					require __DIR__ . "/callback_query/swap_set.php";
+				} else if (preg_match("/^swap\|(TON|SOL)\|.*$/", $callback_data)) {
+					require __DIR__ . "/callback_query/swap_type.php";
+				} else if (str_starts_with($callback_data, joinPipe('swap', 'create', ''))) {
+					require __DIR__ . "/callback_query/swap_create.php";
+				} else if (str_starts_with($callback_data, joinPipe('swap', 'addr', ''))) {
+					require __DIR__ . "/callback_query/swap_custom.php";
 				}
 
 				// Trade Operations

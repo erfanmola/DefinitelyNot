@@ -20,6 +20,12 @@ if ($flooding === false) {
 			case 'alert|price':
 				require __DIR__ . "/private/alert_price.php";
 				break;
+			case 'swap|custom':
+				require __DIR__ . "/private/swap_custom.php";
+				break;
+			case 'swap|amount':
+				require __DIR__ . "/private/swap_amount.php";
+				break;
 		}
 	} else {
 		require __DIR__ . "/private/default.php";

@@ -57,6 +57,11 @@ define('alert_types', [
 	1 => 'INC',
 ]);
 
+define('swap_types', [
+	0 => 'Buy',
+	1 => 'Sell',
+]);
+
 define('patterns', [
 	'wallet' => [
 		'TON' => "/^(EQ|Ef)[0-9A-Za-z_-]{46}$/",
