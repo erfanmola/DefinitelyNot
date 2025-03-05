@@ -1,7 +1,5 @@
 <?php
 
-use OpenSwoole\Coroutine;
-
 [,, $wallet_id, $trade_type] = splitPipe($callback_data);
 
 $wallet_index = array_search($wallet_id, array_column($user['wallets'], 'id'));
@@ -13,7 +11,7 @@ if ($wallet_index > -1) {
 		'inline_keyboard' => [],
 	]);
 
-	$answer = td(t('callback_query.trade_custom.answer', $user['locale']), [
+	$answer = td(t('callback_query.custom_asset.answer', $user['locale']), [
 		'type' => $wallet['type'],
 	]);
 	$show_alert = true;
@@ -24,7 +22,7 @@ if ($wallet_index > -1) {
 		'blockchain' => $wallet['type'],
 	]);
 
-	SendMessage($callback_chat_id, td(t('callback_query.trade_custom.answer', $user['locale']), [
+	SendMessage($callback_chat_id, td(t('callback_query.custom_asset.answer', $user['locale']), [
 		'type' => $wallet['type'],
 	]), $callback_msg_id);
 }

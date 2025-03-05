@@ -2,10 +2,7 @@
 
 use OpenSwoole\Coroutine;
 
-$valid_address = match ($sdata['blockchain']) {
-	'TON' => preg_match("/^(EQ|Ef)[0-9A-Za-z_-]{46}$/", $text),
-	'SOL' => preg_match("/^[1-9A-HJ-NP-Za-km-z]{44}$/", $text),
-};
+$valid_address = preg_match(patterns['wallet'][$sdata['blockchain']], $text);
 
 if ($valid_address) {
 	setState($from_id, $redis);
@@ -19,7 +16,7 @@ if ($valid_address) {
 			function () use (&$from_id, &$user, &$msg_id) {
 				$sent_message_id = SendMessage(
 					$from_id,
-					t('private.trade_custom.processing', $user['locale']),
+					t('private.custom_asset.processing', $user['locale']),
 					$msg_id,
 					response: true,
 				)['result']['message_id'] ?? 0;
@@ -119,15 +116,15 @@ if ($valid_address) {
 							'balance' => number_format(getWalletAssetBalance($wallet['type'], $wallet['address'], $asset['address'])),
 						]
 					),
-					t('private.trade_custom.inactive', $user['locale']),
+					t('private.custom_asset.inactive', $user['locale']),
 				));
 			}
 		} else {
-			EditMessageText($from_id, $sent_msg_id, t('private.trade_custom.invalid_asset', $user['locale']));
+			EditMessageText($from_id, $sent_msg_id, t('private.custom_asset.invalid_asset', $user['locale']));
 		}
 	}
 } else {
-	SendMessage($from_id, td(t('private.trade_custom.invalid_address', $user['locale']), [
+	SendMessage($from_id, td(t('private.custom_asset.invalid_address', $user['locale']), [
 		'type' => $sdata['blockchain'],
 	]), $msg_id);
 }

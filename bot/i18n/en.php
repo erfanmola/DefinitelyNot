@@ -26,11 +26,11 @@ defined('i18n_en') or define('i18n_en', [
 				'rates'      => '📊 Track Rates',
 			],
 		],
-		'trade_custom' => [
+		'custom_asset' => [
 			'invalid_address' => 'Please send a valid <b>%type%</b> asset address. You can use /start to cancel.',
 			'processing' => '⏳ Please wait while we process the asset...',
 			'invalid_asset' => '❌ Unfortunately we are unable to process this asset.',
-			'inactive' => '🚫 This asset is currently not available for swaps in the DEX.',
+			'inactive' => '🚫 This asset is currently not available in the DEX.',
 		],
 	],
 	'inline_query' => [
@@ -63,6 +63,25 @@ defined('i18n_en') or define('i18n_en', [
 				"%conditions%",
 				"⚙️ You can manage each condition by clicking the buttons below"
 			),
+			'delete' => [
+				'answer' => '❌ Condition Delete ❌',
+				'text' => joinDoubleLine(
+					"<b>Are you sure of deleting this condition?</b>",
+					'%condition%',
+					"If you aren't drunk, then click on the ⏹️ button to delete the condition.",
+				),
+			],
+			'info' => [
+				'answer' => '🗒 Condition Info 🗒',
+				'text' => joinDoubleLine(
+					'🗒 Here is your condition:',
+					'%condition%',
+					'⚙️ You can manage condition by clicking the buttons below.',
+				),
+				'buttons' => [
+					'delete' => '❌ Delete Condition',
+				],
+			],
 		],
 		'create' => [
 			'answer' => '🔗 Create Wallet 🔗',
@@ -125,7 +144,7 @@ defined('i18n_en') or define('i18n_en', [
 				'💳 Please select a wallet to set trading conditions:',
 			),
 		],
-		'trade_custom' => [
+		'custom_asset' => [
 			'answer' => 'Please send the contract address of the asset on %type% blockchain. You can use /start to cancel.',
 			'buttons' => [
 				'custom' => 'Custom Address',
@@ -221,25 +240,6 @@ defined('i18n_en') or define('i18n_en', [
 				],
 			],
 		],
-		'condition_info' => [
-			'answer' => '🗒 Condition Info 🗒',
-			'text' => joinDoubleLine(
-				'🗒 Here is your condition:',
-				'%condition%',
-				'⚙️ You can manage condition by clicking the buttons below.',
-			),
-			'buttons' => [
-				'delete' => '❌ Delete Condition',
-			],
-		],
-		'condition_del' => [
-			'answer' => '❌ Condition Delete ❌',
-			'text' => joinDoubleLine(
-				"<b>Are you sure of deleting this condition?</b>",
-				'%condition%',
-				"If you aren't drunk, then click on the ⏹️ button to delete the condition.",
-			),
-		],
 		'alerts' => [
 			'answer' => '🔔 Alerts 🔔',
 			'text'   => joinDoubleLine(
@@ -252,7 +252,47 @@ defined('i18n_en') or define('i18n_en', [
 			],
 			'create' => [
 				'answer' => '🔗 Choose Blockchain 🔗',
-				'text' => '🔗 What blockchain you would like to watch?',
+				'text' => '🔗 What blockchain would you like to watch?',
+			],
+			'choose' => [
+				'answer' => '🎯 Choose Target 🎯',
+				'text'   => "🎯 Please choose the target asset you would like to track. If your target asset is not listed below, you can choose custom address address.",
+			],
+			'type' => [
+				'answer' => '📊 Choose Type 📊',
+				'text' => '📊 What type of price movement for <b>%symbol%</b> would you like to be notified about—an increase or a decrease?',
+				'buttons' => [
+					'increase' => '📈 Increase',
+					'decrease' => '📉 Decrease',
+				],
+			],
+			'set' => [
+				'answer' => '💲 Enter Price 💲',
+				'price' => 'Please enter the price threshold for <b>%symbol%</b> in <b>USD</b> (eg: <code>%price%</code>):',
+				'success_inc' => '📈 Your Alert for <b>%symbol%</b> price movement higher than <b>%price%</b> has been set successfully. You can use /start to continue.',
+				'success_dec' => '📉 Your Alert for <b>%symbol%</b> price movement lower than <b>%price%</b> has been set successfully. You can use /start to continue.',
+				'errors' => [
+					'price_invalid'  => 'The price you entered is not a valid numeric price. Please enter a valid price. You can use /start to cancel.',
+				],
+			],
+			'delete' => [
+				'answer' => '❌ Alert Delete ❌',
+				'text' => joinDoubleLine(
+					"<b>Are you sure of deleting this alert?</b>",
+					'%alert%',
+					"If you aren't drunk, then click on the ⏹️ button to delete the alert.",
+				),
+			],
+			'info' => [
+				'answer' => '🗒 Alert Info 🗒',
+				'text' => joinDoubleLine(
+					'🗒 Here is your alert:',
+					'%alert%',
+					'⚙️ You can manage alert by clicking the buttons below.',
+				),
+				'buttons' => [
+					'delete' => '❌ Delete Alert',
+				],
 			],
 		],
 		'general' => [

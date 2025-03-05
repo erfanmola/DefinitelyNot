@@ -10,7 +10,7 @@ if ($condition_index > -1) {
 	$condition = $user['conditions'][$condition_index];
 
 	EditMessageText($callback_chat_id, $callback_msg_id, td(
-		t('callback_query.condition_info.text', $user['locale']),
+		t('callback_query.conditions.info.text', $user['locale']),
 		[
 			'condition' => generateTradeConditionsListText([$condition], $user['locale']),
 		]
@@ -19,7 +19,7 @@ if ($condition_index > -1) {
 			'inline_keyboard' => [
 				[
 					[
-						'text' => t('callback_query.condition_info.buttons.delete', $user['locale']),
+						'text' => t('callback_query.conditions.info.buttons.delete', $user['locale']),
 						'callback_data' => joinPipe('condition', 'del', $condition['id']),
 					],
 				],
@@ -33,5 +33,5 @@ if ($condition_index > -1) {
 		],
 	]);
 
-	$answer = t('callback_query.condition_info.answer', $user['locale']);
+	$answer = t('callback_query.conditions.info.answer', $user['locale']);
 }

@@ -48,6 +48,36 @@ foreach (DPXDBQuery('trade_conditions', single_result: false, conn: $mysqli) as 
 	]);
 }
 
+// Initialize alerts table
+foreach (DPXDBQuery('alerts', single_result: false, conn: $mysqli) as $alert) {
+	switch ($alert['blockchain']) {
+		case 'TON':
+			if (!$predefinedJettons->exists($alert['asset'])) {
+				$untracked_assets[] = [
+					'type'    => $alert['blockchain'],
+					'address' => $alert['asset'],
+				];
+			}
+			break;
+		case 'SOL':
+			if (!$predefinedTokens->exists($alert['asset'])) {
+				$untracked_assets[] = [
+					'type'    => $alert['blockchain'],
+					'address' => $alert['asset'],
+				];
+			}
+			break;
+	}
+
+	$tableAlerts->set($alert['id'], [
+		'user_id'    => (int)$alert['user_id'],
+		'type'       => (int)$alert['type'],
+		'price'      => (float)$alert['price'],
+		'blockchain' => (string)$alert['blockchain'],
+		'asset'      => (string)$alert['asset'],
+	]);
+}
+
 require __DIR__ . "/../pipelines/track_assets.php";
 
 ConnectionPoolManager::releaseMySQLiConnection($mysqli);

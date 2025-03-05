@@ -52,6 +52,17 @@ define('trade_condition_types_symbol', [
 	2 => 'TP',
 ]);
 
+define('alert_types', [
+	0 => 'DEC',
+	1 => 'INC',
+]);
+
+define('patterns', [
+	'wallet' => [
+		'TON' => "/^(EQ|Ef)[0-9A-Za-z_-]{46}$/",
+		'SOL' => "/^[1-9A-HJ-NP-Za-km-z]{44}$/",
+	],
+]);
 
 define('not_art', [
 	'art' => [

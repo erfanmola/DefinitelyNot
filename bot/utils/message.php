@@ -101,22 +101,19 @@ function generateTradeConditionsListText(array $conditions): string
 	));
 }
 
-function generateAlertsListText(array $alerts, string $locale): string
+function generateAlertsListText(array $alerts): string
 {
-	return "NONE!";
-	// return joinDoubleLine(...array_map(
-	// 	fn($wallet) => joinLine(
-	// 		joinSpace(
-	// 			blockchain_emoji[$wallet['type']],
-	// 			joinEmpty(
-	// 				t('general.balance', $locale),
-	// 				": <b>" . ((float)$wallet['balance'] ? rtrim((number_format($wallet['balance'], 9))) : 0) . " {$wallet['type']}</b>",
-	// 			),
-	// 		),
-	// 		"<code>{$wallet['address']}</code>",
-	// 	),
-	// 	$wallets
-	// ));
+	return joinDoubleLine(...array_map(
+		fn($alert) => joinSpace(
+			blockchain_emoji[$alert['blockchain']],
+			alert_types[$alert['type']],
+			'|',
+			$alert['asset']['symbol'] ?? truncateWalletAddress($alert['asset_address'], 3, 3),
+			'|',
+			joinEmpty("<b>", priceFormat($alert['price']), "</b>"),
+		),
+		$alerts
+	));
 }
 
 function generateNativePricesText(): string

@@ -74,6 +74,23 @@ if ($flooding === false) {
 					require __DIR__ . "/callback_query/conditions_delete.php";
 				}
 
+				// Alerts Operations
+				if (preg_match("/^alert\|(TON|SOL)\|.*\|\d+$/", $callback_data)) {
+					require __DIR__ . "/callback_query/alert_set.php";
+				} else if (preg_match("/^alert\|(TON|SOL)\|.*$/", $callback_data)) {
+					require __DIR__ . "/callback_query/alert_type.php";
+				} else if (str_starts_with($callback_data, joinPipe('alert', 'create', ''))) {
+					require __DIR__ . "/callback_query/alert_create.php";
+				} else if (str_starts_with($callback_data, joinPipe('alert', 'addr', ''))) {
+					require __DIR__ . "/callback_query/alert_custom.php";
+				} else if (str_starts_with($callback_data, joinPipe('alert', 'info', ''))) {
+					require __DIR__ . "/callback_query/alert_info.php";
+				} else if (str_starts_with($callback_data, joinPipe('alert', 'del', ''))) {
+					require __DIR__ . "/callback_query/alert_del.php";
+				} else if (str_starts_with($callback_data, joinPipe('alert', 'delete', ''))) {
+					require __DIR__ . "/callback_query/alert_delete.php";
+				}
+
 				// Trade Operations
 				if (str_starts_with($callback_data, joinPipe('ex', 'info', ''))) {
 					require __DIR__ . "/callback_query/trade_info.php";

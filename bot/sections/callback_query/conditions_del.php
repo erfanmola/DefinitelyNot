@@ -19,7 +19,7 @@ if ($condition_index > -1) {
 	];
 
 	EditMessageText($callback_chat_id, $callback_msg_id, td(
-		t('callback_query.condition_del.text', $user['locale']),
+		t('callback_query.conditions.delete.text', $user['locale']),
 		[
 			'condition' => generateTradeConditionsListText([$condition], $user['locale']),
 		]
@@ -29,5 +29,5 @@ if ($condition_index > -1) {
 		],
 	]);
 
-	$answer = t('callback_query.condition_del.answer', $user['locale']);
+	$answer = t('callback_query.conditions.delete.answer', $user['locale']);
 }

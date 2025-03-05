@@ -44,7 +44,7 @@ if ($wallet_index > -1) {
 				...array_chunk($keyboard, 3),
 				[
 					[
-						'text' => t('callback_query.trade_custom.buttons.custom', $user['locale']),
+						'text' => t('callback_query.custom_asset.buttons.custom', $user['locale']),
 						'callback_data' => joinPipe('ex', 'addr', $wallet['id'], 'lim'),
 					],
 				],

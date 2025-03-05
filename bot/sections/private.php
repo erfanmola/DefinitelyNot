@@ -14,6 +14,12 @@ if ($flooding === false) {
 			case 'trade|process':
 				require __DIR__ . "/private/trade_process.php";
 				break;
+			case 'alert|custom':
+				require __DIR__ . "/private/alert_custom.php";
+				break;
+			case 'alert|price':
+				require __DIR__ . "/private/alert_price.php";
+				break;
 		}
 	} else {
 		require __DIR__ . "/private/default.php";

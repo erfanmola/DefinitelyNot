@@ -9,6 +9,19 @@ EditMessageText($callback_chat_id, $callback_msg_id, td(t('callback_query.alerts
 ]), null, [
 	'reply_markup' => [
 		'inline_keyboard' => [
+			...array_map(fn($alert) => [
+				[
+					'text' => joinSpace(
+						blockchain_emoji[$alert['blockchain']],
+						alert_types[$alert['type']],
+						'|',
+						$alert['asset']['symbol'] ?? truncateWalletAddress($alert['asset_address'], 3, 3),
+						'|',
+						priceFormat($alert['price']),
+					),
+					'callback_data' => joinPipe('alert', 'info', $alert['id']),
+				],
+			], $user['alerts']),
 			[
 				[
 					'text' => t('callback_query.alerts.buttons.new', $user['locale']),
