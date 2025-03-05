@@ -29,6 +29,8 @@ export default defineConfig({
 					{ text: "Wallet Management", link: "/overview/wallets" },
 					{ text: "Security & Config", link: "/overview/configuration" },
 					{ text: "TON APIs", link: "/overview/ton-apis" },
+					{ text: "Database Schema", link: "/overview/database" },
+					{ text: "Setup", link: "/overview/setup" },
 				],
 			},
 		],
