@@ -8,10 +8,10 @@ if ($flooding === false) {
 
 	if ($state && !str_starts_with($text, '/start')) {
 		switch ($state) {
-			case 'trade_custom':
+			case 'trade|custom':
 				require __DIR__ . "/private/trade_custom.php";
 				break;
-			case 'trade_process':
+			case 'trade|process':
 				require __DIR__ . "/private/trade_process.php";
 				break;
 		}

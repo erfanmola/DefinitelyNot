@@ -6,7 +6,7 @@ if ($flooding === false) {
 	require __DIR__ . "/../pipelines/define_user_params.php";
 	require __DIR__ . "/../pipelines/define_user_wallets.php";
 
-	$active_msg_id = $redis->get(joinUnderline($callback_from_id, 'recent', 'msg', 'id'));
+	$active_msg_id = $redis->get(joinPipe($callback_from_id, 'recent', 'msg', 'id'));
 
 	if ((int)$active_msg_id === (int)$callback_msg_id) {
 		switch ($callback_data) {
@@ -26,7 +26,9 @@ if ($flooding === false) {
 			case 'create':
 				require __DIR__ . "/callback_query/create.php";
 				break;
-
+			case 'create|alert':
+				require __DIR__ . "/callback_query/create_alert.php";
+				break;
 			case 'copytrade':
 				require __DIR__ . "/callback_query/copytrade.php";
 				break;
@@ -43,7 +45,7 @@ if ($flooding === false) {
 				require __DIR__ . "/callback_query/alerts.php";
 				break;
 
-			case 'import_wallet':
+			case 'import|wallet':
 				require __DIR__ . "/callback_query/import_wallet.php";
 				break;
 

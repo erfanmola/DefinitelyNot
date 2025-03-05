@@ -12,7 +12,7 @@ $sent_message = SendMessage($from_id, generateMessageDefaultText($user), $msg_id
 
 if (isset($sent_message['result']['message_id'])) {
 
-	$redis->set(joinUnderline($from_id, 'recent', 'msg', 'id'), $sent_message['result']['message_id']);
+	$redis->set(joinPipe($from_id, 'recent', 'msg', 'id'), $sent_message['result']['message_id']);
 
 	$balances = PromiseAll::all(
 		array_map(

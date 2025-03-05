@@ -1,3 +1,28 @@
 <?php
 
-$answer = t('callback_query.import_wallet.answer', $user['locale']);
+require __DIR__ . "/../../pipelines/define_user_alerts.php";
+
+EditMessageText($callback_chat_id, $callback_msg_id, td(t('callback_query.alerts.text', $user['locale']), [
+	'count'   => count($user['alerts']),
+	'max'     => config['ALERTS_ACTIVE_MAX'],
+	'alerts' => generateAlertsListText($user['alerts'], $user['locale']),
+]), null, [
+	'reply_markup' => [
+		'inline_keyboard' => [
+			[
+				[
+					'text' => t('callback_query.alerts.buttons.new', $user['locale']),
+					'callback_data' => joinPipe('create', 'alert'),
+				],
+			],
+			[
+				[
+					'text' => t('general.back', $user['locale']),
+					'callback_data' => 'default',
+				],
+			],
+		],
+	],
+]);
+
+$answer = t('callback_query.alerts.answer', $user['locale']);

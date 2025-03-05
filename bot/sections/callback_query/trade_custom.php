@@ -18,7 +18,7 @@ if ($wallet_index > -1) {
 	]);
 	$show_alert = true;
 
-	setState($callback_from_id, $redis, joinUnderline('trade', 'custom'), [
+	setState($callback_from_id, $redis, joinPipe('trade', 'custom'), [
 		'type' => $trade_type,
 		'wallet_id' => $wallet['id'],
 		'blockchain' => $wallet['type'],

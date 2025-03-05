@@ -20,7 +20,7 @@ if ($wallet_index > -1) {
 
 	syncWalletsBalanceDeferred([$wallet]);
 
-	setState($callback_from_id, $redis, joinUnderline('trade', 'process'), [
+	setState($callback_from_id, $redis, joinPipe('trade', 'process'), [
 		'type' => 'limit',
 		'state' => 'price',
 		'wallet_id' => $wallet['id'],

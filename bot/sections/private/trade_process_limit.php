@@ -11,7 +11,7 @@ switch ($sdata['state']) {
 				]), $msg_id);
 			} else {
 				$sdata['state'] = 'amount';
-				setState($from_id, $redis, joinUnderline('trade', 'process'), $sdata);
+				setState($from_id, $redis, joinPipe('trade', 'process'), $sdata);
 
 				SendMessage($from_id, td(t('callback_query.trade_limit.condition.amount', $user['locale']), [
 					'symbol' => $asset['symbol'],

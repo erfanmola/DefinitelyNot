@@ -240,6 +240,21 @@ defined('i18n_en') or define('i18n_en', [
 				"If you aren't drunk, then click on the ⏹️ button to delete the condition.",
 			),
 		],
+		'alerts' => [
+			'answer' => '🔔 Alerts 🔔',
+			'text'   => joinDoubleLine(
+				"💡 You have <b>%count%</b> active alerts (Max: %max%)",
+				"%alerts%",
+				"⚙️ You can manage each alert by clicking the buttons below."
+			),
+			'buttons' => [
+				'new' => 'Create new Alert',
+			],
+			'create' => [
+				'answer' => '🔗 Choose Blockchain 🔗',
+				'text' => '🔗 What blockchain you would like to watch?',
+			],
+		],
 		'general' => [
 			'buttons' => [
 				'price' => 'Enter Price',

@@ -74,7 +74,7 @@ if ($valid_address) {
 			},
 		]);
 
-		$redis->set(joinUnderline($from_id, 'recent', 'msg', 'id'), $sent_msg_id);
+		$redis->set(joinPipe($from_id, 'recent', 'msg', 'id'), $sent_msg_id);
 
 		if ($asset) {
 			if ($asset['active'] && $asset['price']) {

@@ -55,7 +55,7 @@ function generateMessageDefaultButtons(mixed $user): array
 		[
 			[
 				'text' => t('private.default.buttons.import', $user['locale']),
-				'callback_data' => 'import_wallet',
+				'callback_data' => joinPipe('import', 'wallet'),
 			],
 			[
 				'text' => t('private.default.buttons.copy', $user['locale']),
@@ -99,6 +99,24 @@ function generateTradeConditionsListText(array $conditions): string
 		),
 		$conditions
 	));
+}
+
+function generateAlertsListText(array $alerts, string $locale): string
+{
+	return "NONE!";
+	// return joinDoubleLine(...array_map(
+	// 	fn($wallet) => joinLine(
+	// 		joinSpace(
+	// 			blockchain_emoji[$wallet['type']],
+	// 			joinEmpty(
+	// 				t('general.balance', $locale),
+	// 				": <b>" . ((float)$wallet['balance'] ? rtrim((number_format($wallet['balance'], 9))) : 0) . " {$wallet['type']}</b>",
+	// 			),
+	// 		),
+	// 		"<code>{$wallet['address']}</code>",
+	// 	),
+	// 	$wallets
+	// ));
 }
 
 function generateNativePricesText(): string

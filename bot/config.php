@@ -16,4 +16,5 @@ defined('config') or define('config', [
 	'TABLE_ALERTS_SIZE' => 1024, // value of 1_000_000 would be nice for production, ~91MB Memory per 1M Items
 	'TABLE_CONDITIONS_SIZE' => 1024, // value of 1_000_000 would be nice for production, ~107MB Memory per 1M Items
 	'TRADE_CONDITIONS_PENDING_MAX' => 10,
+	'ALERTS_ACTIVE_MAX' => 10,
 ]);

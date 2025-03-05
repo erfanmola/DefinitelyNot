@@ -2,7 +2,7 @@
 
 function setState(int|string $user_id, mixed &$redis, string | null $state = null, mixed $data = null)
 {
-	$redis->set(joinUnderline('state', $user_id), json_encode([
+	$redis->set(joinPipe('state', $user_id), json_encode([
 		's' => $state,
 		'd' => $data,
 	]));
@@ -10,7 +10,7 @@ function setState(int|string $user_id, mixed &$redis, string | null $state = nul
 
 function getState(int|string $user_id, mixed &$redis): array
 {
-	$data = $redis->get(joinUnderline('state', $user_id));
+	$data = $redis->get(joinPipe('state', $user_id));
 
 	if (!$data) {
 		$data = [
