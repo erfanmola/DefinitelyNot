@@ -49,7 +49,9 @@ switch ($sdata['state']) {
 				]), $msg_id);
 			} else {
 
-				SendMessage($from_id, t('callback_query.general.max_conditions', $user['locale']), $msg_id);
+				SendMessage($from_id, td(t('callback_query.conditions.errors.max', $user['locale']), [
+					'max' => config['TRADE_CONDITIONS_PENDING_MAX'],
+				]), $msg_id);
 			}
 		} else {
 			SendMessage($from_id, t('callback_query.trade_limit.condition.errors.amount_invalid', $user['locale']), $msg_id);

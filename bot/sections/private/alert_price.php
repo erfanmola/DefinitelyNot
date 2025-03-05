@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__ . "/../../pipelines/define_user_alerts.php";
+
 $sdata['price'] = (float)$text;
 
 if ($sdata['price']) {
@@ -11,18 +13,26 @@ if ($sdata['price']) {
 	if ($asset) {
 		setState($from_id, $redis);
 
-		createAlert([
-			'user_id'    => $from_id,
-			'blockchain' => $sdata['blockchain'],
-			'type'       => $sdata['type'],
-			'price'      => $sdata['price'],
-			'asset'      => $sdata['asset'],
-		], $mysqli);
+		if (count($user['alerts']) < config['ALERTS_ACTIVE_MAX']) {
 
-		SendMessage($from_id, td(t('callback_query.alerts.set.success_' . strtolower(alert_types[$sdata['type']]), $user['locale']), [
-			'symbol' => $asset['symbol'],
-			'price' => priceFormat($sdata['price']),
-		]), $msg_id);
+			createAlert([
+				'user_id'    => $from_id,
+				'blockchain' => $sdata['blockchain'],
+				'type'       => $sdata['type'],
+				'price'      => $sdata['price'],
+				'asset'      => $sdata['asset'],
+			], $mysqli);
+
+			SendMessage($from_id, td(t('callback_query.alerts.set.success_' . strtolower(alert_types[$sdata['type']]), $user['locale']), [
+				'symbol' => $asset['symbol'],
+				'price' => priceFormat($sdata['price']),
+			]), $msg_id);
+		} else {
+
+			SendMessage($from_id, td(t('callback_query.alerts.errors.max', $user['locale']), [
+				'max' => config['ALERTS_ACTIVE_MAX'],
+			]), $msg_id);
+		}
 	}
 } else {
 	SendMessage($from_id, t('callback_query.alerts.set.errors.price_invalid', $user['locale']), $msg_id);

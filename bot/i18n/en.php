@@ -82,6 +82,9 @@ defined('i18n_en') or define('i18n_en', [
 					'delete' => '❌ Delete Condition',
 				],
 			],
+			'errors' => [
+				'max' => '🚫 You already have reached the limit of <b>%max%</b> number of active trade conditions, please delete some before you continue.',
+			],
 		],
 		'create' => [
 			'answer' => '🔗 Create Wallet 🔗',
@@ -294,13 +297,15 @@ defined('i18n_en') or define('i18n_en', [
 					'delete' => '❌ Delete Alert',
 				],
 			],
+			'errors' => [
+				'max' => '🚫 You already have reached the limit of <b>%max%</b> number of active alerts, please delete some before you continue.',
+			],
 		],
 		'general' => [
 			'buttons' => [
 				'price' => 'Enter Price',
 			],
 			'expired' => '⚠️ This message is expired, please use the latest message for interactions.',
-			'max_conditions' => '🚫 You already have reached the limit of <b>%max%</b> number of active trade conditions, please delete some before you continue.',
 		],
 	],
 	'general' => [
