@@ -89,7 +89,7 @@ defined('i18n_en') or define('i18n_en', [
 		],
 		'create' => [
 			'answer' => '🔗 Create Wallet 🔗',
-			'text' => '🔗 What kind of wallet do you like to create?',
+			'text' => '🔗 What kind of wallet would you like to create?',
 		],
 		'create_wallet' => [
 			'answer' => '⛓️ Wallet Created ⛓️',
@@ -252,7 +252,7 @@ defined('i18n_en') or define('i18n_en', [
 				"⚙️ You can manage each alert by clicking the buttons below."
 			),
 			'buttons' => [
-				'new' => 'Create new Alert',
+				'new' => 'Create New Alert',
 			],
 			'create' => [
 				'answer' => '🔗 Choose Blockchain 🔗',
@@ -303,7 +303,7 @@ defined('i18n_en') or define('i18n_en', [
 			],
 			'notify' => [
 				'0' => '📉 Price of <b>%symbol%</b> dropped below <b>%price%</b>.',
-				'1' => '📈 Price of <b>%symbol%</b> raise above <b>%price%</b>.',
+				'1' => '📈 Price of <b>%symbol%</b> rise above <b>%price%</b>.',
 			],
 		],
 		'swap' => [

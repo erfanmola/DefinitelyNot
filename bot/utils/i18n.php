@@ -2,12 +2,20 @@
 
 require_once __DIR__ . "/../i18n/en.php";
 require_once __DIR__ . "/../i18n/fa.php";
+require_once __DIR__ . "/../i18n/ar.php";
+require_once __DIR__ . "/../i18n/de.php";
+require_once __DIR__ . "/../i18n/hi.php";
+require_once __DIR__ . "/../i18n/ru.php";
 
 function t(string $path, $language): string
 {
 	$path = explode('.', $path);
 	$data = match ($language) {
 		'fa'    => i18n_fa,
+		'ar'    => i18n_ar,
+		'de'    => i18n_de,
+		'hi'    => i18n_hi,
+		'ru'    => i18n_ru,
 		default => i18n_en,
 	};
 

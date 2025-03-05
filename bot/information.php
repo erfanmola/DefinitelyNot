@@ -10,10 +10,10 @@ define('TDXAdmin', $_ENV['BOT_REPORT_ADMIN_ID']);
 define('languages', [
 	'en' => 'English',
 	'fa' => 'فارسی',
-	// 'ru' => 'Русский',
-	// 'ar' => 'العربية',
-	// 'de' => 'Deutsch',
-	// 'hi' => 'हिंदी'
+	'ru' => 'Русский',
+	'ar' => 'العربية',
+	'de' => 'Deutsch',
+	'hi' => 'हिंदी'
 ]);
 
 define('language_flags', [
