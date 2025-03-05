@@ -10,4 +10,5 @@ $tableConditions->column('price', Table::TYPE_FLOAT);
 $tableConditions->column('amount', Table::TYPE_FLOAT);
 $tableConditions->column('blockchain', Table::TYPE_STRING, 3);
 $tableConditions->column('asset', Table::TYPE_STRING, 48);
+$tableConditions->column('status', Table::TYPE_INT, 1);
 $tableConditions->create();

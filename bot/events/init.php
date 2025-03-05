@@ -16,9 +16,8 @@ foreach ($result['tokens'] as $token) {
 
 $untracked_assets = [];
 
-// TODO: only status 1 conditions
 // Initialize conditions table
-foreach (DPXDBQuery('trade_conditions', single_result: false, conn: $mysqli) as $condition) {
+foreach (DPXDBQuery('trade_conditions', conditions: ['status' => 0], single_result: false, conn: $mysqli) as $condition) {
 	switch ($condition['blockchain']) {
 		case 'TON':
 			if (!$predefinedJettons->exists($condition['asset'])) {
@@ -46,6 +45,7 @@ foreach (DPXDBQuery('trade_conditions', single_result: false, conn: $mysqli) as 
 		'amount'     => (float)$condition['amount'],
 		'blockchain' => (string)$condition['blockchain'],
 		'asset'      => (string)$condition['asset'],
+		'status'     => (int)$condition['status'],
 	]);
 }
 

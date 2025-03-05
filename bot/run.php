@@ -62,6 +62,7 @@ $server->on("message", function (Server $ws, $frame) use (&$tableNative, &$table
 
 	if ($result['type'] === 'rates') {
 		require __DIR__ . "/events/rates.php";
+		require __DIR__ . "/events/conditions.php";
 		require __DIR__ . "/events/alerts.php";
 	} else if ($result['type'] === 'init') {
 		require __DIR__ . "/events/init.php";

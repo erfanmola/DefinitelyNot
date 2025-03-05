@@ -41,6 +41,7 @@ function createTradeCondition(array $params, mixed &$conn)
 			'amount'     => (float)$params['amount'],
 			'blockchain' => (string)$params['blockchain'],
 			'asset'      => (string)$params['asset'],
+			'status'     => 0,
 		]);
 	}
 }

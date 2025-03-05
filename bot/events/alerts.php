@@ -27,6 +27,7 @@ foreach ($tableAlerts as $id => $alert) {
 
 			if ($active) {
 				switch ($alert['type']) {
+					// Decrease
 					case 0:
 						if ($price < $alert['price'] && $alert['status'] === 0) {
 							$trigger[] = $id;
@@ -34,6 +35,8 @@ foreach ($tableAlerts as $id => $alert) {
 							$reactivate[] = $id;
 						}
 						break;
+
+					// Increase
 					case 1:
 						if ($price > $alert['price'] && $alert['status'] === 0) {
 							$trigger[] = $id;

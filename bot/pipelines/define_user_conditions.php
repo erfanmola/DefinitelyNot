@@ -1,7 +1,7 @@
 <?php
 
 if ($user) {
-	$user['conditions'] = getTradeConditions($user['user_id'], $mysqli);
+	$user['conditions'] = getTradeConditionsByStatus($user['user_id'], 0, $mysqli);
 
 	foreach ($user['conditions'] as $key => $condition) {
 		$condition['wallet'] = $user['wallets'][array_search($condition['wallet_id'], array_column($user['wallets'], 'id'))] ?? null;

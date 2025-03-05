@@ -47,7 +47,7 @@ define('trade_condition_types', [
 ]);
 
 define('trade_condition_types_symbol', [
-	0 => 'Limit',
+	0 => 'LIM',
 	1 => 'SL',
 	2 => 'TP',
 ]);
